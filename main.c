@@ -1,37 +1,59 @@
 #include <stdbool.h>
 #include <stdio.h>
-#include <stdlib.h>
 
-/* Program that counts words and lines from stdinput
+
+/* Count word length
  *
  * Usage:
- * $ make && cat text_file.txt | outp.exe
+ * Start by imputing number of words to process
+ * Then input words, separated by  spaces
  *
+ * The result is reversed histogram, showing the amount of characters in a word
  */
 
 int main(int argc, char *argv[])
 {
-	int character;
-	int word, line;
+	int number_of_words;
 
-	word = line = 0;
+	printf("Number of words to count length: %i\n", (number_of_words = getchar()-'0'));
 
-	while((character = getchar()) != EOF) {
-		switch (character) {
-			case '\t':
-				;
-			case ' ':
-				++word;
-				break;
-			case '\n':
-				++line;
-				break;
-				
-		}
+	int word_lenght_array[number_of_words];
+
+	for (int i = 0; i < number_of_words; i++){
+		word_lenght_array[i] = 0;
 	}
-	printf("Words: %i, lines: %i", word, line);
-	
-	
-	
 
+	int next_char = getchar();
+
+	for (int word = 0; word < number_of_words ; word++) {
+		next_char = getchar();
+		putchar(next_char);
+		while (true) {
+			if (next_char == ' ' || next_char == '\n' || next_char == '\t') {
+				break;
+			}
+			word_lenght_array[word]++;
+			next_char = getchar();
+		}
+		printf("%i:%i\t", word, word_lenght_array[word]);
+	}
+	putchar('\n');
+
+	bool need_more_rows = false;
+	while (true) {
+		for (int i = 0; i < number_of_words; ++i) {
+			if (word_lenght_array[i] > 0) {
+				printf("%s", "||");
+				word_lenght_array[i]--;
+				need_more_rows = true;
+			}
+			putchar('\t');
+		}
+		putchar('\n');
+
+		if (!need_more_rows) {
+			break;
+		}
+		need_more_rows = false;
+	}
 }
