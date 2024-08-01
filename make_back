@@ -1,0 +1,31 @@
+CC      = gcc
+CFLAGS  = -g `pkg-config --cflags gtk4`
+RM      = rm -f
+LIBS 	= `pkg-config --libs gtk4` 
+
+
+ifdef OS
+	OUTP = -o main.exe
+else
+	OUTP = -o main
+endif
+
+default: make_main
+
+all: make_li make_win
+
+make_main: 
+	$(CC) $(CFLAGS) $(OUTP) main.c $(LIBS)
+
+
+make_li: main.c
+	$(CC) $(CFLAGS) -o main main.c $(LIBS)
+
+make_win: main.c
+	$(CC) $(CFLAGS) -o main.exe main.c $(LIBS)
+
+clean veryclean:
+	$(RM) main.exe
+	$(RM) main
+
+
