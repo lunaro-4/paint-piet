@@ -1,10 +1,8 @@
-// #include "gio/gio.h"
-// #include "glib.h"
-// #include "glib-object.h"
+#define G_APPLICATION_DEFAULT_FLAGS 0
 #include <gtk/gtk.h>
 #include <stdbool.h>
 #include <stdio.h>
-#include <SDL2/SDL.h>
+/* more stuff here */
 
 static void app_main(GtkApplication *app, gpointer user_data)
 { 
@@ -22,7 +20,7 @@ int main(int argc, char *argv[])
 	int status;
 
 	app = gtk_application_new("org.application.me", G_APPLICATION_DEFAULT_FLAGS);
-	// gtk_init();
+	gtk_init();
 	GtkWidget *window;
 	window = gtk_window_new();
 	gtk_widget_set_visible(window, true);
