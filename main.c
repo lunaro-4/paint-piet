@@ -3,10 +3,27 @@
 
 int main(int argc, char *argv[])
 {
-	void *vo;
-	int c;
-	FILE *file = fopen("in.png", "rb");
-	while ((c = fread(vo, unsigned long, unsigned long, FILE *)) != EOF){
+	int character;
+
+	char* file_path;
+
+	if (argc > 1) 
+	{
+		file_path = argv[1];
 	}
+	else {
+		file_path = "in.png";
+	}
+	FILE *fptr = fopen(file_path, "r");
+	if (fptr == NULL)
+	{
+		perror("error openining file");
+		return 1;
+	}
+	while ((character = fgetc(fptr)) != EOF) 
+	{
+		printf("%x ", character);
+	}
+
 	return 0;
 }
