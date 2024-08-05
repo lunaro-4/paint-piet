@@ -72,3 +72,12 @@ void printarr_1_hex_pretty(int *arr)
 	}
 
 }
+int get_chunk_value(FILE * fptr)
+{
+	int value = 0;
+	for (char char_count = 0; char_count < 4; char_count++)
+	{
+		value += fgetc(fptr);
+	}
+	return value;
+}
