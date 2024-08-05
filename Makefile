@@ -1,7 +1,7 @@
 CC      = gcc
 CFLAGS  = -g `pkg-config --cflags gtk4`
 RM      = rm -f
-LIBS 	= `pkg-config --libs gtk4 --libs spng` 
+LIBS 	= `pkg-config --libs gtk4 --libs spng --libs libpng` 
 
 OUT  	= out
 

@@ -1,11 +1,11 @@
+#include <png.h>
 #include <stdio.h>
-#include <spng.h>
 
 
 int main(int argc, char *argv[])
 {
+
 	char* file_path;
-	spng_ctx * ctx = NULL;
 
 	if (argc > 1) {
 		file_path = argv[1];
@@ -15,20 +15,28 @@ int main(int argc, char *argv[])
 	}
 	FILE *fptr = fopen(file_path, "r");
 
-	ctx = spng_ctx_new(0);
-	spng_set_png_file(ctx, fptr);
+    png_structp pngptr =
+        png_create_read_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
+    png_infop pnginfo = png_create_info_struct(pngptr);
+    png_set_palette_to_rgb(pngptr);
+	png_const_inforp *info_ptr;
+	png_uint_32 *width, *height;
+	
+	// int bit_depth, color_type, interlace_method, compression_method, filter_method;
+	// png_read_info(pngptr, info_ptr);
+	// png_get_IHDR(pngptr, info_ptr, &width, &height, &bit_depth, &color_type, &interlace_method, NULL, NULL);
 
-	struct spng_ihdr ihdr;
-	spng_get_ihdr(ctx, &ihdr);
+    png_init_io(pngptr, fptr);
+	png_bytepp rows;
+    png_read_png(pngptr, pnginfo, PNG_TRANSFORM_IDENTITY, NULL);
+    rows = png_get_rows(pngptr, pnginfo);
 
-	// const int * color_name = color_type_str(ihdr.color_type);
-
-	printf("width: %u\n"
-			"height: %u\n"
-			"bit depth: %u\n"
-			"color type: %u - 0\n",
-			ihdr.width, ihdr.height, ihdr.bit_depth, ihdr.color_type);
-
+	for (int i = 0; i < 8; i++) {
+        for (int j = 0; j < 8 * 3; j += 3) {
+            printf("%d %d %d ", rows[i][j], rows[i][j + 1], rows[i][j + 2]);
+        }   
+        printf("\n");
+    }
 
 	return 0;
 }

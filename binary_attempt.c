@@ -60,10 +60,37 @@ int main(int argc, char *argv[])
 	printf("compression_method: %i\n", compression_method);
 	printf("filter_method: %i\n", filter_method);
 	printf("interlace_method: %i\n", interlace_method);
+	char count_success = 0;
 	while ((character = fgetc(fptr)) != EOF ) 
 	{
-		// printf("%x ", character);
-		putchar(character);
+		switch (character) {
+			case 'I':
+				if (count_success == 0) count_success = 1;
+				else  count_success = 0;
+				break;
+			case 'D':
+				if (count_success == 1) count_success = 2;
+				else count_success = 0;
+				break;
+			case 'A':
+				if (count_success == 2) count_success = 3;
+				else count_success = 0;
+				break;
+			case 'T':
+				if (count_success == 3) count_success = 4;
+				else count_success = 0;
+				break;
+			default:
+				continue;
+		}
+		if (count_success == 4) break;
+	}
+
+
+	while ((character = fgetc(fptr)) != EOF ) 
+	{
+		printf("%x ", character);
+		// putchar(character);
 		chunk_value += character;
 		if (chunk_count < 4) {
 			;
@@ -75,6 +102,5 @@ int main(int argc, char *argv[])
 		}
 		chunk_count++;
 	}
-
 	return 0;
 }
