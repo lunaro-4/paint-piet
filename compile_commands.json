@@ -1,6 +1,6 @@
 [
  {
-  "directory": "/mnt/c/Users/pavel/git/paint-piet",
+  "directory": "/home/lunaro/git/paint-piet",
   "arguments": [
    "gcc",
    "-g",
@@ -8,6 +8,7 @@
    "-msse",
    "-msse2",
    "-pthread",
+   "-I/usr/local/include",
    "-I/usr/include/gtk-4.0",
    "-I/usr/include/gio-unix-2.0",
    "-I/usr/include/cairo",
@@ -32,6 +33,8 @@
    "-o",
    "out/main",
    "main.c",
+   "colormatrix.c",
+   "custom_utils.c",
    "-lgtk-4",
    "-lpangocairo-1.0",
    "-lpango-1.0",
@@ -42,8 +45,11 @@
    "-lgraphene-1.0",
    "-lgio-2.0",
    "-lgobject-2.0",
-   "-lglib-2.0"
+   "-lglib-2.0",
+   "-lspng",
+   "-lpng16",
+   "-lz"
   ],
-  "file": "main.c"
+  "file": "custom_utils.c"
  }
 ]
