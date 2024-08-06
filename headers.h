@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "structs.h"
+#include <dirent.h>
 // #include "custom_utils.h"
 
 #endif // !HEADRERS

@@ -55,3 +55,11 @@ dkms.conf
 # Other
 out/*
 .cache/*
+**/CMake*
+!**/CMakeLists.txt
+**/CTest*
+**/cmake_install.cmake
+**/Makefile
+Makefile
+
+Testing
