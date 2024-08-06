@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <spng.h>
-#include "custom_utils.c"
+#include "custom_utils.h"
 
 #define TRUE 1
 #define FALSE 0

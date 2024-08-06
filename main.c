@@ -1,6 +1,21 @@
+#include "structs.h"
 #include <png.h>
 #include <stdio.h>
-#include "custom_utils.c"
+#include <stdlib.h>
+#include "custom_utils.h"
+
+// struct color {
+// 	int red;
+// 	int green;
+// 	int blue;
+// };
+//
+
+void create_matrix(png_bytepp png_rows,  int width, int height, struct color *matrix[height][width]);
+
+// struct color * init_color(struct color * c){
+// 	return malloc(sizeof(c));
+// }
 
 
 int main(int argc, char *argv[])
@@ -43,12 +58,32 @@ int main(int argc, char *argv[])
 	png_bytepp rows;
     png_read_png(pngptr, pnginfo, PNG_TRANSFORM_IDENTITY, NULL);
     rows = png_get_rows(pngptr, pnginfo);
+	struct color *matrix[height][width];
+
 	for (int i = 0; i < height; i++) {
-        for (int j = 0; j+3 <= width * 3 ; j += 3) {
-            printf("R:%2x G:%2x B:%2x ", rows[i][j], rows[i][j + 1], rows[i][j + 2]);
-        }   
-        printf("\n");
-    }
+        for (int j = 0; j < width  ; j++ ) {
+			static struct color *c;
+			c = malloc(sizeof(struct color));
+			matrix[i][j] = c;
+		}
+	}
+
+	create_matrix(rows, width, height, matrix);
+	// print_color_matrix(height, width, matrix);
 
 	return 0;
+}
+
+void create_matrix(png_bytepp png_rows,  int width, int height, struct color *matrix[height][width])
+{
+	// printf("width: %d, height: %d\n", width, height);
+	for (int i = 0; i < height; i++) {
+        for (int j = 0; j+2 < width * 3 ; j += 3) {
+			struct color *c = matrix[i][j/3];
+			c->red = (int) png_rows[i][j];
+			c->green = png_rows[i][j+1];
+			c->blue = png_rows[i][j+2];
+        }   
+    }
+
 }
