@@ -9,6 +9,8 @@ void create_matrix(png_bytepp png_rows,  int width, int height, struct color *ma
 
 void get_rows(FILE *fptr, png_bytepp *rows);
 
+void get_width_and_height(FILE *fptr, int* width, int* height);
+
 int main(int argc, char *argv[])
 {
 
@@ -26,16 +28,9 @@ int main(int argc, char *argv[])
 		perror("error openining file");
 		return 1;
 	}
-	// 8 byte PNG metadata 
-	get_chunk_value(fptr);
-	get_chunk_value(fptr);
-	// chunk start
-	get_chunk_value(fptr);
-	// metadata IHDR flag
-	get_chunk_value(fptr);
+
 	int width, height;
-	width = get_chunk_value(fptr);
-	height = get_chunk_value(fptr);
+	get_width_and_height(fptr, &width, &height);
 
 	fclose(fptr);
 	fptr = fopen(file_path, "r");
@@ -79,4 +74,17 @@ void get_rows(FILE *fptr, png_bytepp *rows)
     png_init_io(pngptr, fptr);
     png_read_png(pngptr, pnginfo, PNG_TRANSFORM_IDENTITY, NULL);
     *rows = png_get_rows(pngptr, pnginfo);
+}
+
+void get_width_and_height(FILE *fptr, int* width, int* height)
+{
+	// 8 byte PNG metadata 
+	get_chunk_value(fptr);
+	get_chunk_value(fptr);
+	// chunk start
+	get_chunk_value(fptr);
+	// metadata IHDR flag
+	get_chunk_value(fptr);
+	*width = get_chunk_value(fptr);
+	*height = get_chunk_value(fptr);
 }
