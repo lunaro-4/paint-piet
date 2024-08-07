@@ -15,7 +15,7 @@ void create_matrix(png_bytepp png_rows,  int width, int height, struct color *ma
 
 void get_rows(FILE *fptr, png_bytepp *rows);
 
-void get_width_and_height(FILE *fptr, int* width, int* height);
+void get_height_and_width(FILE *fptr, int* height, int* width);
 
 
 #endif // !FUNCS_1_INCLUDED

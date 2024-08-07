@@ -24,7 +24,7 @@ void get_rows(FILE *fptr, png_bytepp *rows)
     *rows = png_get_rows(pngptr, pnginfo);
 }
 
-void get_width_and_height(FILE *fptr, int* width, int* height)
+void get_height_and_width(FILE *fptr, int* height, int* width )
 {
 	// 8 byte PNG metadata 
 	get_chunk_value(fptr);

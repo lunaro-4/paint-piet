@@ -15,7 +15,7 @@ include_directories(${Check_INCLUDE_DIRS})
 link_directories (${Check_LIBRARY_DIRS})
 
 
-add_executable(tests test.c ../colormatrix.c ../custom_utils.c)
+add_executable(tests test.c ../colormatrix.c ../custom_utils.c test_suits_and_cases.c)
 target_link_libraries(tests ${CHECK_LIBRARIES} )
 # target_include_directories(tests PRIVATE "../")
 include_directories(${PROJECT_SOURCE_DIR})

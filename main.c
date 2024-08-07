@@ -18,8 +18,8 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
-	int width, height;
-	get_width_and_height(fptr, &width, &height);
+	int height, width;
+	get_height_and_width(fptr, &height, &width);
 
 	fclose(fptr);
 	fptr = fopen(file_path, "r");
