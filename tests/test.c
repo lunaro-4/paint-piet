@@ -14,12 +14,13 @@ START_TEST(test_one_parameter_parsing)
 	// printf("%s\n", strcat(abs_path, name));
 	fptr = fopen("/home/lunaro/git/paint-piet/example/HelloWorld.png", "r");
 	int height, width;
-	get_width_and_height(fptr, &height, &width);
+	// get_width_and_height(fptr, &height, &width);
 
 	int assert_width = 30, assert_height = 29;
 
 	// if (width == assert_width && height == assert_height) return 1;
-	ck_assert(width == assert_width && height == assert_height);
+	ck_assert_int_eq(width, assert_width);
+	ck_assert_int_eq(height, assert_height);
 }
 END_TEST
 

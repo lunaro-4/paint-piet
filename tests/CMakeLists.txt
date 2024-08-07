@@ -22,8 +22,10 @@ include_directories(${PROJECT_SOURCE_DIR})
 target_link_libraries (tests ${PNG_LIBRARIES})
 
 # Create testing target and redirect its output to `Testing` folder
-add_test(NAME test COMMAND test WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/tests)
-set_tests_properties(test PROPERTIES TIMEOUT 30) 
+# add_test(NAME check_test COMMAND test WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/tests)
+add_test(NAME check_test COMMAND ${PROJECT_SOURCE_DIR}/out/tests WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/tests)
+add_custom_target(check COMMAND ${CMAKE_CTEST_COMMAND} DEPENDS tests)
+set_tests_properties(check_test PROPERTIES TIMEOUT 30) 
 
 # Aditional Valgrind test to check memory leaks in code
 include(FindValgrind)
