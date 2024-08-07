@@ -1,7 +1,12 @@
 #include "headers.h"
 
+
+
+void parse_codels(void);
+
 int main(int argc, char *argv[])
 {
+	struct codel cod;
 
 	char* file_path;
 
