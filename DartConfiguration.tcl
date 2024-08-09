@@ -4,14 +4,14 @@
 
 
 # Configuration directories and files
-SourceDirectory: /home/lunaro/git/paint-piet
-BuildDirectory: /home/lunaro/git/paint-piet
+SourceDirectory: /mnt/c/Users/pavel/git/paint-piet
+BuildDirectory: /mnt/c/Users/pavel/git/paint-piet
 
 # Where to place the cost data store
 CostDataFile: 
 
 # Site is something like machine.domain, i.e. pragmatic.crd
-Site: lunaro-MAIN
+Site: lunaro-laptop
 
 # Build name is osname-revision-compiler, i.e. Linux-2.4.2-2smp-c++
 BuildName: Linux-cc
@@ -26,7 +26,7 @@ SubmitURL: http://
 NightlyStartTime: 00:00:00 EDT
 
 # Commands for the build/test/submit cycle
-ConfigureCommand: "/usr/bin/cmake" "/home/lunaro/git/paint-piet"
+ConfigureCommand: "/usr/bin/cmake" "/mnt/c/Users/pavel/git/paint-piet"
 MakeCommand: /usr/bin/cmake --build . --config "${CTEST_CONFIGURATION_TYPE}" -- -i
 DefaultCTestConfigurationType: Release
 

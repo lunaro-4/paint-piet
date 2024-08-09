@@ -1,12 +1,20 @@
 #include <stdint.h>
 
+
+#ifndef ENUMS
+#define ENUMS
+
 enum moves {
 	CC_LEFT, CC_RIGHT
 };
 
 enum direction {
-	DP_UP = 0, DP_RIGHT = 1, DP_DOWN = 2, DP_LEFT = 3
+	 DP_RIGHT = 0, DP_DOWN = 1, DP_LEFT = 2, DP_UP = 3
 };
+#endif // !ENUMS
+
+#ifndef STRUCTS
+#define STRUCTS
 
 struct color {
 	int red;
@@ -30,4 +38,7 @@ struct codel {
 
 struct pointer {
 	enum moves CC;
+	enum direction DP;
 };
+
+#endif // !STRUCTS

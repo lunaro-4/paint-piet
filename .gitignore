@@ -62,4 +62,5 @@ out/*
 **/Makefile
 Makefile
 
+**.log
 Testing

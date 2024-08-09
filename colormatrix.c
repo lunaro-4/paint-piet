@@ -1,5 +1,6 @@
 #include "headers.h"
 
+
 void create_matrix(png_bytepp png_rows,  int width, int height, struct color *matrix[height][width])
 {
 	for (int i = 0; i < height; i++) {

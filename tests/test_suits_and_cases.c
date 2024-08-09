@@ -1,8 +1,13 @@
-#include "test_headers.h"
 #include "test_defs.h"
+#include <check.h>
+
+void fill_parsing_cases();
+void fill_colors_cases();
 
 Suite * parameter_parsing (void)
 {
+	fill_parsing_cases();
+
 	Suite *s;
 	TCase *tc_core;
 
@@ -13,6 +18,18 @@ Suite * parameter_parsing (void)
 	// tcase_add_test(tc_core, test_one_parameter_parsing);
 	tcase_add_loop_test(tc_core, test_height_and_width_parsing, 0, (sizeof parsing_cases / sizeof parsing_cases[0]));
 	suite_add_tcase(s, tc_core);
+
+	return s;
+}
+
+Suite * color_parsing (void)
+{
+	fill_colors_cases();
+
+	Suite *s = suite_create("Colors");
+	TCase *tc_core = tcase_create("Colors_cases");
+
+	tcase_add_loop_test(tc_core, test_color_matrix, 0, 0);
 
 	return s;
 }
@@ -48,3 +65,30 @@ void fill_parsing_cases()
 	parsing_cases[5] = par_case_5;
 	parsing_cases[6] = par_case_6;
 }
+
+void fill_colors_cases()
+{						 /* RED GREEN BLUE */
+	struct color color_1 = {0xff, 0x0, 0x0},
+				 color_2 = {0xff, 0xff, 0xff},
+				 color_3 = {0x0, 0x0, 0x0},
+				 color_4 = {0x0, 0x0, 0x0},
+				 color_5 = {0x0, 0x0, 0x0},
+				 color_6 = {0x0, 0x0, 0x0},
+				 color_7 = {0x0, 0x0, 0x0},
+				 color_8 = {0x0, 0x0, 0x0};
+	// colors_cases[1];
+	static struct colors_case case_one = {
+		{
+			{0xff, 0x0, 0x0},
+			{0xff, 0xff, 0xff},
+			{0x0, 0x0, 0x0},
+			{0x0, 0x0, 0x0},
+			{0x0, 0x0, 0x0},
+			{0x0, 0x0, 0x0},
+			{0x0, 0x0, 0x0},
+			{0x0, 0x0, 0x0}
+		},
+		"Endless.png"} ;
+	colors_cases[0] = case_one;
+}
+

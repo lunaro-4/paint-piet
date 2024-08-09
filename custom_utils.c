@@ -1,5 +1,7 @@
 #include "headers.h"
 
+struct color white_color = {0xff, 0xff, 0xff}, black_color = {0x0, 0x0, 0x0};
+
 int get_chunk_value(FILE * fptr)
 {
 	int value = 0;
@@ -21,4 +23,17 @@ void print_color_matrix(int height, int widht, struct color *matrix[height][widh
         }   
         printf("\n");
     }
+}
+
+bool is_same_color(struct color *a, struct color *b)
+{ 
+	return (a->red == b->red && a->green == b->green && a->blue == b->blue );
+}
+bool is_black(struct color *col)
+{
+	return is_same_color(col, &black_color);
+}
+bool is_white(struct color *col)
+{
+	return is_same_color(col, &white_color);
 }

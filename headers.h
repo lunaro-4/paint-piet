@@ -5,9 +5,13 @@
 #include <stdlib.h>
 #include "structs.h"
 #include <dirent.h>
+#include <stdbool.h>
 // #include "custom_utils.h"
 
 #endif // !HEADRERS
+
+#define WHITE_INDEX 0
+#define BLACK_INDEX 1
 
 #ifndef FUNCS_1_INCLUDED
 #define FUNCS_1_INCLUDED
@@ -26,6 +30,12 @@ void get_height_and_width(FILE *fptr, int* height, int* width);
 int get_chunk_value(FILE * fptr);
 
 void print_color_matrix(int height, int widht, struct color *matrix[height][widht]);
+
+bool is_same_color(struct color *a, struct color *b);
+
+bool is_black(struct color *col);
+
+bool is_white(struct color *col);
 
 #endif // !FUNCS_2_INCLUDED
 
