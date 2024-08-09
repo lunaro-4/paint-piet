@@ -6,13 +6,19 @@
 
 #ifndef GET_FILE
 #define GET_FILE 
-void get_file(FILE *fptr, char file_name[])
+void get_file(FILE **fptr, char file_name[])
 {
 	char rel_path[1000];
-	char *abs_path = realpath("..", NULL);
+	char *abs_path = realpath(".", NULL);
+	// HACK
+	char *is_in_tests = strstr(abs_path, "tests");
+	if (is_in_tests) abs_path = realpath("..", NULL);
+	// perror(abs_path);
+
 	sprintf(rel_path, "%s%s%s", abs_path, "/example/", file_name);
-	fptr = fopen(rel_path, "r");
-	if (!fptr) 
+	// perror(rel_path);
+	*fptr = fopen(rel_path, "r");
+	if (*fptr == NULL) 
 	{
 		char msg[1030];
 		sprintf(msg, "Error opening file: %s", rel_path);
@@ -33,9 +39,10 @@ START_TEST(test_height_and_width_parsing)
 {
     struct parsing_case test_case = parsing_cases[_i];
 	static FILE* fptr;
-	get_file(fptr, test_case.file_name);
-
 	int height, width;
+	get_file(&fptr, test_case.file_name);
+
+	if (!fptr) perror("Bad file");
 	get_height_and_width(fptr, &height, &width);
 
 	int assert_height = test_case.height, assert_width = test_case.width;
@@ -51,10 +58,15 @@ START_TEST(test_color_matrix)
 {
 	struct colors_case test_case = colors_cases[_i];
 	static FILE* fptr;
-	get_file(fptr, test_case.file_name);
-
 	int height, width;
+	get_file(&fptr, test_case.file_name);
+
+	if (!fptr) perror("Bad file");
+	perror(test_case.file_name);
 	get_height_and_width(fptr, &height, &width);
+
+	fclose(fptr);
+	get_file(&fptr, test_case.file_name);
 
 	png_bytepp rows;
 	get_rows(fptr, &rows);

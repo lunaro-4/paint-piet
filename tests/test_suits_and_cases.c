@@ -26,10 +26,12 @@ Suite * color_parsing (void)
 {
 	fill_colors_cases();
 
-	Suite *s = suite_create("Colors");
+	Suite *s;
+	s = suite_create("Colors");
 	TCase *tc_core = tcase_create("Colors_cases");
 
-	tcase_add_loop_test(tc_core, test_color_matrix, 0, 0);
+	tcase_add_loop_test(tc_core, test_color_matrix, 0, (sizeof colors_cases / sizeof colors_cases[0]));
+	suite_add_tcase(s, tc_core);
 
 	return s;
 }
@@ -90,5 +92,6 @@ void fill_colors_cases()
 		},
 		"Endless.png"} ;
 	colors_cases[0] = case_one;
+	colors_cases[1] = case_one;
 }
 

@@ -14,16 +14,19 @@ int main(int argc, char *argv[])
 	// remove("../log.log");
 
 	bool params_flag = false, colors_flag = false;
+	// printf("%i\n", argc);
 	while (--argc > 0)
 	{
-		if (strcmp(*argv++, "all"))
+		argv++;
+		printf("%i\n", strcmp(*argv, "all"));
+		if (strcmp(*argv, "all") == 0)
 		{
 			params_flag = true;
 			colors_flag = true;
 			break;
 		}
-		else if (strcmp(*argv++, "params")) params_flag = true;
-		else if (strcmp(*argv++, "colors")) colors_flag = true;
+		else if (strcmp(*argv, "params") == 0) params_flag = true;
+		else if (strcmp(*argv, "colors") == 0) colors_flag = true;
 	}
 
 	Suite *null_suite = NULL;

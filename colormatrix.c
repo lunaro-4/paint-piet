@@ -9,6 +9,7 @@ void create_matrix(png_bytepp png_rows,  int width, int height, struct color *ma
 			c->red = (int) png_rows[i][j];
 			c->green = png_rows[i][j+1];
 			c->blue = png_rows[i][j+2];
+			printf("R: %2x, G: %2x, B: %2x  \n", c->red, c->green, c->blue);
         }   
     }
 }
