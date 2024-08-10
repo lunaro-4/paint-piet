@@ -21,6 +21,9 @@ void get_rows(FILE *fptr, png_bytepp *rows);
 
 void get_height_and_width(FILE *fptr, int* height, int* width);
 
+void test_nerby(int y, int x, int height, int width, int codel_index, int map[][width], struct color *matrix[][width]);
+
+void fill_2d_map(int height, int width, struct color *matrix[][width], int map[][width]);
 
 #endif // !FUNCS_1_INCLUDED
 
