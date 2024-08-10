@@ -62,7 +62,6 @@ START_TEST(test_color_matrix)
 	get_file(&fptr, test_case.file_name);
 
 	if (!fptr) perror("Bad file");
-	perror(test_case.file_name);
 	get_height_and_width(fptr, &height, &width);
 
 	fclose(fptr);

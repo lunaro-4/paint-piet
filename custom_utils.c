@@ -25,9 +25,23 @@ void print_color_matrix(int height, int widht, struct color *matrix[height][widh
     }
 }
 
+bool is_light_hue(int color)
+{
+	return color >= 0xC0;
+}
+
 bool is_same_color(struct color *a, struct color *b)
 { 
 	return (a->red == b->red && a->green == b->green && a->blue == b->blue );
+}
+
+bool is_same_color_fuzz(struct color *a, struct color *b)
+{
+	bool result = true;
+	result = result && is_light_hue(a->red) == is_light_hue(b->red);
+	result = result && is_light_hue(a->green) == is_light_hue(b->green);
+	result = result && is_light_hue(a->blue) == is_light_hue(b->blue);
+	return result;
 }
 bool is_black(struct color *col)
 {

@@ -11,10 +11,8 @@
 int main(int argc, char *argv[])
 { 
 	remove(LOGFILE);
-	// remove("../log.log");
 
 	bool params_flag = false, colors_flag = false;
-	// printf("%i\n", argc);
 	while (--argc > 0)
 	{
 		argv++;
@@ -37,7 +35,7 @@ int main(int argc, char *argv[])
 	if (colors_flag) srunner_add_suite(sr, color_parsing());
 
 
-	srunner_run_all(sr, CK_VERBOSE);
+	srunner_run_all(sr, CK_NORMAL);
 
 	int fails_and_errors;
 	fails_and_errors = srunner_ntests_failed(sr);

@@ -15,7 +15,7 @@ static struct parsing_case {
 static struct colors_case {
 	struct color colors_array[100000];
 	char file_name[100];
-} colors_cases[2];
+} colors_cases[3];
 
 struct parsing_case* new_parsing_case(int height, int width, char *filename);
 
