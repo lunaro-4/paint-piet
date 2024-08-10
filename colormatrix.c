@@ -41,14 +41,15 @@ void get_height_and_width(FILE *fptr, int* height, int* width )
 }
 void test_nerby(int y, int x, int height, int width, int codel_index, int map[][width], struct color *matrix[][width])
 {
+	/* move across a board and mark points as visited */
 	if (map[y][x] == -1) map[y][x] = codel_index;
-	// move across a board and mark points as visited
 	int around[4][2] = {
 		{y, x + 1},
 		{y + 1, x},
 		{y, x - 1},
 		{y - 1, x}
 	};
+	char message[100];
 	
 	for (int i = 0; i < 4; i++)
 	{ 
@@ -56,54 +57,42 @@ void test_nerby(int y, int x, int height, int width, int codel_index, int map[][
 		bool is_in_height =
 			new_y < height && new_y >= 0;
 		bool is_in_width =
-			new_x < height && new_x >= 0;
-		bool is_valid_check_target;
+			new_x < width && new_x >= 0;
+		bool is_valid_check_target = false;
+		// if (y == 9 && x == 29) printf("i: %i, new_x: %i, new_y: %i, ii_h: %i, ii_w: %i\n", i, new_x, new_y, is_in_height, is_in_width); 
 		if (is_in_height && is_in_width )
-		is_valid_check_target =
-			is_same_color(matrix[y][x], matrix[new_y][new_x]) &&
-			map[new_y][new_x] == -1;
-		else return;
+			is_valid_check_target = is_same_color(matrix[y][x], matrix[new_y][new_x]) && map[new_y][new_x] == -1;
+		// else return;
 		if (is_in_height && is_in_width && is_valid_check_target)
-		{
 			test_nerby(new_y, new_x, height, width, codel_index, map, matrix);
-		}
+	
 	}
 	
 }
 
-void fill_2d_map(int height, int width, struct color *matrix[][width], int map[][width])
+void fill_2d_map(int height, int width, int map[][width], struct color *matrix[][width], int *n_of_codels, struct color *codel_array[])
 {
-	int n_of_codels = 1;
+	int local_n_of_codels = 1;
 
 	for (int y = 0; y < height; y++)
 	{
 		for (int x = 0; x < width; x++)
 		{
-			struct color *mat_col = matrix[y][x];
-			if (!mat_col) {
-				perror("Bad color");
-				return;
-			}
-			if (map[y][x] == -1)
-			{
-				if (is_black(mat_col)) map[y][x] = BLACK_INDEX; 
-				else if(is_white(mat_col)) map[y][x] = WHITE_INDEX;
-				else 
-				{
-					n_of_codels++;
-					test_nerby(y, x, height, width, n_of_codels, map, matrix);
-				}
-			}
-		}
-	}
+			if (map[y][x] != -1) continue;
 
-	for (int i = 0; i < height; i++)
-	{
-		for (int j = 0; j < width; j++)
-		{
-			printf("%i\t", map[i][j]);
+			struct color *mat_col = matrix[y][x];
+			if (!mat_col) { perror("Bad color"); return; }
+
+			if (is_black(mat_col)) map[y][x] = BLACK_INDEX; 
+			else if(is_white(mat_col)) map[y][x] = WHITE_INDEX;
+			else 
+			{
+				local_n_of_codels++;
+				test_nerby(y, x, height, width, local_n_of_codels, map, matrix);
+				codel_array[local_n_of_codels] = matrix[y][x];
+			}
 		}
-		putchar('\n');
 	}
+	*n_of_codels = local_n_of_codels;
 
 }

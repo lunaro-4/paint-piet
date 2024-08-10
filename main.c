@@ -66,7 +66,7 @@ int main(int argc, char *argv[])
 	create_matrix(rows, width, height, matrix);
 	// print_color_matrix(height, width, matrix);
 
-	int map[height][width];
+	int map[height][width], n_of_codels;
 	for (int y = 0; y < height; y++)
 	{
 		for (int x = 0; x < width; x++)
@@ -74,8 +74,17 @@ int main(int argc, char *argv[])
 			map[y][x] = -1;
 		}
 	}
-	fill_2d_map(height, width, matrix, map);
+	struct color *codel_array[CODEL_ARRAY_SIZE];
+	fill_2d_map(height, width, map, matrix, &n_of_codels, codel_array);
 
+
+	print_2d_int(height, width, map);
+	for (int i = 2; i < n_of_codels; i++)
+		printf("codel_index: %2i R: %2x, G: %2x, B: %2x\t", i, codel_array[i]->red, codel_array[i]->green, codel_array[i]->blue);
+	// printf("\n%i\n", n_of_codels);
+
+
+	free_2d_colors(height, width, matrix);
 	return 0;
 }
 

@@ -25,6 +25,27 @@ void print_color_matrix(int height, int widht, struct color *matrix[height][widh
     }
 }
 
+void print_2d_int(int height, int width, int arr[height][width])
+{
+	for (int i = 0; i < height; i++)
+	{
+		for (int j = 0; j < width; j++)
+		{
+			printf("%i\t", arr[i][j]);
+		}
+		putchar('\n');
+	}
+
+}
+void free_2d_colors(int height, int width, struct color *arr[][width])
+{
+	for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width  ; j++ ) {
+			free(arr[i][j]);
+		}
+	}
+}
+
 bool is_light_hue(int color)
 {
 	return color >= 0xC0;

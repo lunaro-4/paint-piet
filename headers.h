@@ -10,8 +10,9 @@
 
 #endif // !HEADRERS
 
-#define WHITE_INDEX 0
-#define BLACK_INDEX 1
+#define WHITE_INDEX 1
+#define BLACK_INDEX 0
+#define CODEL_ARRAY_SIZE 500
 
 #ifndef FUNCS_1_INCLUDED
 #define FUNCS_1_INCLUDED
@@ -23,7 +24,7 @@ void get_height_and_width(FILE *fptr, int* height, int* width);
 
 void test_nerby(int y, int x, int height, int width, int codel_index, int map[][width], struct color *matrix[][width]);
 
-void fill_2d_map(int height, int width, struct color *matrix[][width], int map[][width]);
+void fill_2d_map(int height, int width, int map[][width], struct color *matrix[][width], int *n_of_codels, struct color *codel_array[]);
 
 #endif // !FUNCS_1_INCLUDED
 
@@ -33,6 +34,10 @@ void fill_2d_map(int height, int width, struct color *matrix[][width], int map[]
 int get_chunk_value(FILE * fptr);
 
 void print_color_matrix(int height, int widht, struct color *matrix[height][widht]);
+
+void print_2d_int(int height, int width, int arr[height][width]);
+
+void free_2d_colors(int height, int width, struct color *arr[][width]);
 
 bool is_same_color(struct color *a, struct color *b);
 
