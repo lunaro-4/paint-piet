@@ -23,7 +23,8 @@ target_link_libraries (tests ${PNG_LIBRARIES})
 # add_test(NAME check_test COMMAND test WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/tests)
 add_test(NAME test_params COMMAND ${PROJECT_SOURCE_DIR}/out/tests params )
 add_test(NAME test_colors COMMAND ${PROJECT_SOURCE_DIR}/out/tests colors )
-set_tests_properties(test_params test_colors PROPERTIES TIMEOUT 30) 
+add_test(NAME test_compare COMMAND ${PROJECT_SOURCE_DIR}/out/tests compare )
+set_tests_properties(test_params test_colors test_compare PROPERTIES TIMEOUT 30) 
 
 
 include(FindValgrind)

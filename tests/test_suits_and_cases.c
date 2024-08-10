@@ -35,6 +35,17 @@ Suite * color_parsing (void)
 
 	return s;
 }
+Suite * color_comparison (void)
+{
+	Suite *s;
+	s = suite_create("Compare");
+	TCase *tc_core = tcase_create("Compare_cases");
+
+	tcase_add_test(tc_core, test_compare);
+	suite_add_tcase(s, tc_core);
+
+	return s;
+}
 
 
 

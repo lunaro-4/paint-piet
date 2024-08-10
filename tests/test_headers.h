@@ -21,6 +21,7 @@ struct parsing_case* new_parsing_case(int height, int width, char *filename);
 
 Suite * parameter_parsing (void);
 Suite * color_parsing (void);
+Suite * color_comparison (void);
 // Suite * parameter_parsing (void);
 
 

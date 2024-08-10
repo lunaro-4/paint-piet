@@ -93,6 +93,24 @@ START_TEST(test_color_matrix)
 }
 END_TEST
 
+START_TEST(test_compare)
+{
+	struct color color_black = {0x0, 0x0, 0x0};
+	struct color color_white = {0xff, 0xff, 0xff};
+	struct color color_1 = {0xff, 0x0, 0x0};
+	struct color color_2 = {0xff, 0xc0, 0xc0};
+	struct color color_3 = {0x0, 0x0, 0xc0};
+	struct color color_4 = {0xff, 0xc0, 0xc0};
 
+	ck_assert(is_black(&color_black));
+	ck_assert(is_white(&color_white));
+	ck_assert(!is_black(&color_white));
+	ck_assert(is_same_color(&color_2, &color_4));
+	ck_assert(!is_same_color(&color_2, &color_1));
+	ck_assert(!is_same_color(&color_1, &color_3));
+	ck_assert(!is_same_color(&color_3, &color_black));
+
+}
+END_TEST
 
 #endif // !DEFS

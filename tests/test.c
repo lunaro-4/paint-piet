@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
 { 
 	remove(LOGFILE);
 
-	bool params_flag = false, colors_flag = false;
+	bool params_flag = false, colors_flag = false, compare_flag = false;
 	while (--argc > 0)
 	{
 		argv++;
@@ -21,10 +21,12 @@ int main(int argc, char *argv[])
 		{
 			params_flag = true;
 			colors_flag = true;
+			compare_flag = true;
 			break;
 		}
 		else if (strcmp(*argv, "params") == 0) params_flag = true;
 		else if (strcmp(*argv, "colors") == 0) colors_flag = true;
+		else if (strcmp(*argv, "compare") == 0) compare_flag = true;
 	}
 
 	Suite *null_suite = NULL;
@@ -33,6 +35,7 @@ int main(int argc, char *argv[])
 	sr = srunner_create(null_suite);
 	if (params_flag) srunner_add_suite(sr, parameter_parsing());
 	if (colors_flag) srunner_add_suite(sr, color_parsing());
+	if (compare_flag) srunner_add_suite(sr, color_comparison());
 
 
 	srunner_run_all(sr, CK_NORMAL);
