@@ -39,10 +39,20 @@ void get_height_and_width(FILE *fptr, int* height, int* width )
 	*width = get_chunk_value(fptr);
 	*height = get_chunk_value(fptr);
 }
-void test_nerby(int y, int x, int height, int width, int codel_index, int map[][width], struct color *matrix[][width])
+
+
+void check_nearby_codels(int height, int width, struct color *matrix[][width], struct codel *codel_array[])
+{
+}
+
+void test_nerby(int y, int x, int height, int width, int codel_index, int map[][width], struct color *matrix[][width], int *codel_size)
 {
 	/* move across a board and mark points as visited */
-	if (map[y][x] == -1) map[y][x] = codel_index;
+	if (map[y][x] == -1)
+	{
+		map[y][x] = codel_index;
+		codel_size++;
+	}
 	int around[4][2] = {
 		{y, x + 1},
 		{y + 1, x},
@@ -64,13 +74,13 @@ void test_nerby(int y, int x, int height, int width, int codel_index, int map[][
 			is_valid_check_target = is_same_color(matrix[y][x], matrix[new_y][new_x]) && map[new_y][new_x] == -1;
 		// else return;
 		if (is_in_height && is_in_width && is_valid_check_target)
-			test_nerby(new_y, new_x, height, width, codel_index, map, matrix);
+			test_nerby(new_y, new_x, height, width, codel_index, map, matrix, codel_size);
 	
 	}
 	
 }
 
-void fill_2d_map(int height, int width, int map[][width], struct color *matrix[][width], int *n_of_codels, struct color *codel_array[])
+void fill_2d_map(int height, int width, int map[][width], struct color *matrix[][width], int *n_of_codels, struct codel *codel_array[])
 {
 	int local_n_of_codels = 1;
 
@@ -87,9 +97,13 @@ void fill_2d_map(int height, int width, int map[][width], struct color *matrix[]
 			else if(is_white(mat_col)) map[y][x] = WHITE_INDEX;
 			else 
 			{
+				struct codel *codel = malloc(sizeof(struct codel));
+				int corner_coords[4], codel_size;
 				local_n_of_codels++;
-				test_nerby(y, x, height, width, local_n_of_codels, map, matrix);
-				codel_array[local_n_of_codels] = matrix[y][x];
+				test_nerby(y, x, height, width, local_n_of_codels, map, matrix, &codel_size);
+				codel->size = codel_size;
+
+				codel_array[local_n_of_codels] = codel;
 			}
 		}
 	}

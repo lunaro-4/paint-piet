@@ -33,7 +33,7 @@ struct color {
 struct codel {
 	uint16_t size;
 	struct color color;
-	int corner_points[4][2];	
+	int corner_points[4][3];	
 };
 
 struct pointer {
@@ -51,6 +51,10 @@ struct pointer {
 
 #define CODEL_ARRAY_SIZE 500
 
+#define max(x, y) ((x > y) ? x : y)
+#define min(x, y) ((x < y) ? x : y)
 
+#define INIT_CORNER_POINTS(corner_points, y, x)  corner_points[0][0] = y; corner_points[0][1] = y; corner_points[1][0] = x; corner_points[1][1] = x; corner_points[2][0] = y; corner_points[2][1] = y; corner_points[3][0] = x; corner_points[3][1] = x;
 
+#define RESOLVE_CORNER_POINTS(corner_points, y, x) corner_points[0][0] = min(corner_points[0][0], y); corner_points[0][1] = max(corner_points[0][0], y); corner_points[1][0] = max(corner_points[0][0], x); corner_points[1][1] = min(corner_points[0][0], x); corner_points[2][0] = max(corner_points[0][0], y); corner_points[2][1] = min(corner_points[0][0], y); corner_points[3][0] = min(corner_points[0][0], x); corner_points[3][1] = max(corner_points[0][0], x);
 #endif // !CONSTS
