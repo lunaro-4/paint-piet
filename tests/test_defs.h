@@ -67,8 +67,6 @@ START_TEST(test_color_matrix)
 	fclose(fptr);
 	get_file(&fptr, test_case.file_name);
 
-	png_bytepp rows;
-	get_rows(fptr, &rows);
 	struct color *matrix[height][width];
 
 	for (int i = 0; i < height; i++) {
@@ -80,7 +78,7 @@ START_TEST(test_color_matrix)
 	}
 
 	int fails;
-	create_matrix(rows, width, height, matrix);
+	create_matrix(fptr, width, height, matrix);
 
 	for (int h = 0; h < height; h++)
 	{

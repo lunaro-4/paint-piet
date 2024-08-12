@@ -145,8 +145,7 @@ int main(int argc, char *argv[])
 	fclose(fptr);
 	fptr = fopen(file_path, "r");
 
-	png_bytepp rows;
-	get_rows(fptr, &rows);
+
 	struct color *matrix[height][width];
 
 	for (int i = 0; i < height; i++) {
@@ -157,8 +156,9 @@ int main(int argc, char *argv[])
 		}
 	}
 
-	create_matrix(rows, width, height, matrix);
+	create_matrix(fptr, width, height, matrix);
 	// print_color_matrix(height, width, matrix);
+
 
 	int map[height][width], n_of_codels;
 	for (int y = 0; y < height; y++)

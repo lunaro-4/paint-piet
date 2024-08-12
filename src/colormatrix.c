@@ -1,8 +1,20 @@
 #include "headers.h"
+#include "png.h"
+#include "pngconf.h"
 
 
-void create_matrix(png_bytepp png_rows,  int width, int height, struct color *matrix[height][width])
+void create_matrix(FILE *fptr,  int width, int height, struct color *matrix[height][width])
 {
+	png_structp pngptr =
+		png_create_read_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
+    png_infop pnginfo = png_create_info_struct(pngptr);
+    png_set_palette_to_rgb(pngptr);
+	png_inforp *info_ptr;
+    png_init_io(pngptr, fptr);
+    png_read_png(pngptr, pnginfo, PNG_TRANSFORM_IDENTITY, NULL);
+    png_bytepp png_rows = png_get_rows(pngptr, pnginfo);
+	png_voidp vptr;
+
 	for (int i = 0; i < height; i++) {
         for (int j = 0; j+2 < width * 3 ; j += 3) {
 			struct color *c = matrix[i][j/3];
@@ -13,18 +25,22 @@ void create_matrix(png_bytepp png_rows,  int width, int height, struct color *ma
         }   
 		// putchar('\n');
     }
+	png_destroy_read_struct(&pngptr, &pnginfo, &pnginfo);
 }
 
-void get_rows(FILE *fptr, png_bytepp *rows)
+void get_rows_and_matrix(FILE *fptr, png_bytepp *rows)
 {  
 	png_structp pngptr =
 		png_create_read_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
     png_infop pnginfo = png_create_info_struct(pngptr);
     png_set_palette_to_rgb(pngptr);
-	png_const_inforp *info_ptr;
+	png_inforp *info_ptr;
     png_init_io(pngptr, fptr);
     png_read_png(pngptr, pnginfo, PNG_TRANSFORM_IDENTITY, NULL);
     *rows = png_get_rows(pngptr, pnginfo);
+	png_voidp vptr;
+	png_free_data(pngptr, *info_ptr, PNG_FREE_ROWS, -1);
+	
 }
 
 void get_height_and_width(FILE *fptr, int* height, int* width )

@@ -11,22 +11,22 @@
 #endif // !HEADRERS
 
 
-#ifndef FUNCS_1_INCLUDED
-#define FUNCS_1_INCLUDED
-void create_matrix(png_bytepp png_rows,  int width, int height, struct color *matrix[height][width]);
+#ifndef COLORMATRIX
+#define COLORMATRIX
+void create_matrix(FILE *fptr,  int width, int height, struct color *matrix[height][width]);
 
 void get_rows(FILE *fptr, png_bytepp *rows);
 
 void get_height_and_width(FILE *fptr, int* height, int* width);
 
-void test_nerby(int y, int x, int height, int width, int codel_index, int map[][width], struct color *matrix[][width]);
+void test_nerby(int y, int x, int height, int width, int codel_index, int map[][width], struct color *matrix[][width], int *codel_size);
 
-void fill_2d_map(int height, int width, int map[][width], struct color *matrix[][width], int *n_of_codels, struct color *codel_array[]);
+void fill_2d_map(int height, int width, int map[][width], struct color *matrix[][width], int *n_of_codels, struct codel *codel_array[]);
 
-#endif // !FUNCS_1_INCLUDED
+#endif // !COLORMATRIX
 
-#ifndef FUNCS_2_INCLUDED
-#define FUNCS_2_INCLUDED
+#ifndef CUSTOM_UTILS
+#define CUSTOM_UTILS
 
 int get_chunk_value(FILE * fptr);
 
@@ -42,5 +42,5 @@ bool is_black(struct color *col);
 
 bool is_white(struct color *col);
 
-#endif // !FUNCS_2_INCLUDED
+#endif // !CUSTOM_UTILS
 
