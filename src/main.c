@@ -6,26 +6,6 @@
 
 
 
-/* void append_point(struct point *array, struct point value)
-{
-	int arr_len = 0, i = 0;
-	while (array + i != NULL)
-	{
-		arr_len++;
-		i++;
-	}
-	struct point tmp_arr[arr_len+1];
-	for (i = 0; i < arr_len; i++)
-		tmp_arr[i] = array[i];
-	free(array);
-	array = malloc(arr_len+1 * sizeof(struct point));
-	for (i = 0; i < arr_len; i++)
-		array[i] = tmp_arr[i];
-	array[arr_len] = value;
-	
-} */
-
-
 int main(int argc, char *argv[])
 {
 	struct codel cod;

@@ -4,7 +4,7 @@
 
 
 #include <check.h>
-#include "../headers.h"
+#include "../src/headers.h"
 
 static struct parsing_case {
 	int height;

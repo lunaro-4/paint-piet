@@ -61,6 +61,7 @@ out/*
 **/cmake_install.cmake
 **/Makefile
 Makefile
+DartConfiguration.tcl
 
 **.log
 Testing

@@ -5,7 +5,7 @@
 #define ENUMS
 
 enum moves {
-	CC_LEFT, CC_RIGHT
+	CC_LEFT = 0, CC_RIGHT = 1
 };
 
 enum direction {
@@ -22,18 +22,18 @@ struct color {
 	int blue;
 };
 
-struct point {
-	uint32_t x;
-	uint32_t y;
-};
-struct corner_point {
-	struct point possible_move_coords[2];
-};
+// struct point {
+// 	uint32_t x;
+// 	uint32_t y;
+// };
+// struct corner_point {
+// 	int next_codels[2];
+// };
 
 struct codel {
 	uint16_t size;
-	uint16_t color;
-	struct point corner_points[4];	
+	struct color color;
+	int corner_points[4][2];	
 };
 
 struct pointer {
@@ -42,3 +42,15 @@ struct pointer {
 };
 
 #endif // !STRUCTS
+
+#ifndef CONSTS
+#define CONSTS
+
+#define WHITE_INDEX 1
+#define BLACK_INDEX 0
+
+#define CODEL_ARRAY_SIZE 500
+
+
+
+#endif // !CONSTS

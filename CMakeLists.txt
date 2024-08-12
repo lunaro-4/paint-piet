@@ -14,9 +14,8 @@ link_directories (${PNG_LIBRARY_DIRS})
 enable_testing()
 
 add_subdirectory(tests)
+add_subdirectory(src)
 # set(CMAKE_CTEST_ARGUMENTS --output-on-falure)
 
 
 
-add_executable(main main.c colormatrix.c custom_utils.c)
-target_link_libraries (main ${PNG_LIBRARIES})

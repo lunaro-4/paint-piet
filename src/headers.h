@@ -10,9 +10,6 @@
 
 #endif // !HEADRERS
 
-#define WHITE_INDEX 1
-#define BLACK_INDEX 0
-#define CODEL_ARRAY_SIZE 500
 
 #ifndef FUNCS_1_INCLUDED
 #define FUNCS_1_INCLUDED
