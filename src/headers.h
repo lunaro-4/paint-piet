@@ -23,7 +23,7 @@ void test_nerby(int y, int x, int height, int width, int codel_index, int map[][
 
 void fill_2d_map(int height, int width, int map[][width], struct color *matrix[][width], int *n_of_codels, struct codel *codel_array[]);
 
-void find_neighbor_codels(int height, int width, int map[][width], struct codel *codel_array[]);
+void find_codels_corner_points(int height, int width, int map[][width], struct codel *codel_array[]);
 
 #endif // !COLORMATRIX
 
@@ -44,5 +44,8 @@ bool is_black(struct color *col);
 
 bool is_white(struct color *col);
 
+void print_codel_array_colors(struct codel *codel_array[], int n_of_codels);
+
+void print_codel_array_corner_points(struct codel *codel_array[], int n_of_codels);
 #endif // !CUSTOM_UTILS
 

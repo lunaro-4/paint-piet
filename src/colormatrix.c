@@ -215,7 +215,7 @@ void resolve_codel (int height, int width, int y, int x, int map[][width], struc
 }
 
 
-void find_neighbor_codels(int height, int width, int map[][width], struct codel *codel_array[])
+void find_codels_corner_points(int height, int width, int map[][width], struct codel *codel_array[])
 {  
 
 	int current_codel_index = 0; 
