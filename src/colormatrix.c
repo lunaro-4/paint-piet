@@ -1,9 +1,30 @@
 #include "headers.h"
 #include "png.h"
 #include "pngconf.h"
+#include <stdio.h>
 
+void parse_RGB(int width, int height, struct color *matrix[height][width], png_bytepp png_rows)
+{
+	for (int i = 0; i < height; i++) 
+        for (int j = 0; j+2 < width * 3 ; j += 3) {
+			struct color *c = matrix[i][j/3];
+			c->red = (int) png_rows[i][j];
+			c->green = png_rows[i][j+1];
+			c->blue = png_rows[i][j+2];
+        }   
+}
+void parse_RGBA(int width, int height, struct color *matrix[height][width], png_bytepp png_rows)
+{
+	for (int i = 0; i < height; i++) 
+        for (int j = 0; j+3 < width * 4 ; j += 4) {
+			struct color *c = matrix[i][j/4];
+			c->red = (int) png_rows[i][j];
+			c->green = png_rows[i][j+1];
+			c->blue = png_rows[i][j+2];
+        }   
+}
 
-void create_matrix(FILE *fptr,  int width, int height, struct color *matrix[height][width])
+int create_matrix(FILE *fptr,  int width, int height, struct color *matrix[height][width])
 {
 	png_structp pngptr =
 		png_create_read_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
@@ -14,18 +35,26 @@ void create_matrix(FILE *fptr,  int width, int height, struct color *matrix[heig
     png_read_png(pngptr, pnginfo, PNG_TRANSFORM_IDENTITY, NULL);
     png_bytepp png_rows = png_get_rows(pngptr, pnginfo);
 	png_voidp vptr;
+	png_uint_32 p_height, p_width;
+	int bit_depth, color_type, interlace_method, compression_method, filter_method;
+	png_get_IHDR(pngptr, pnginfo, &p_width, &p_height, &bit_depth, &color_type, &interlace_method, &compression_method, &filter_method);
+	/* printf("w: %i, h: %i\nbit_depth: %i\ncolor_type: %i\ninterlace_method: %i\ncompression_method: %i\nfilter_method: %i\n", 
+			width, height, bit_depth, color_type, interlace_method, compression_method, filter_method); */
 
-	for (int i = 0; i < height; i++) {
-        for (int j = 0; j+2 < width * 3 ; j += 3) {
-			struct color *c = matrix[i][j/3];
-			c->red = (int) png_rows[i][j];
-			c->green = png_rows[i][j+1];
-			c->blue = png_rows[i][j+2];
-			// printf("R: %2x, G: %2x, B: %2x  ", c->red, c->green, c->blue);
-        }   
-		// putchar('\n');
-    }
+	switch (color_type) {
+		case 2:
+			parse_RGB(width, height, matrix, png_rows);
+			break;
+		case 6:
+			parse_RGBA(width, height, matrix, png_rows);
+			break;
+		default:
+			printf("Incorrect png color type");
+			return 1;
+	}
+
 	png_destroy_read_struct(&pngptr, &pnginfo, &pnginfo);
+	return 0;
 }
 
 void get_rows_and_matrix(FILE *fptr, png_bytepp *rows)

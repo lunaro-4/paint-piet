@@ -13,7 +13,7 @@
 
 #ifndef COLORMATRIX
 #define COLORMATRIX
-void create_matrix(FILE *fptr,  int width, int height, struct color *matrix[height][width]);
+int create_matrix(FILE *fptr,  int width, int height, struct color *matrix[height][width]);
 
 void get_rows(FILE *fptr, png_bytepp *rows);
 

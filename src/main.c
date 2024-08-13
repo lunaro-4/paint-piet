@@ -42,7 +42,8 @@ int main(int argc, char *argv[])
 		}
 	}
 
-	create_matrix(fptr, width, height, matrix);
+	int res = create_matrix(fptr, width, height, matrix);
+	if (res) return 1;
 
 
 	int map[height][width], n_of_codels;
@@ -56,7 +57,14 @@ int main(int argc, char *argv[])
 	find_codels_corner_points(height, width, map, codel_array);
 
 
-	// print_color_matrix(height, width, matrix);
+
+
+	struct pointer pointer = {DP_RIGHT, CC_LEFT};
+
+
+
+
+	print_color_matrix(height, width, matrix);
 	// print_2d_int(height, width, map);
 	// print_codel_array_colors(codel_array, n_of_codels);
 	// print_codel_array_corner_points(codel_array, n_of_codels);

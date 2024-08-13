@@ -37,8 +37,8 @@ struct codel {
 };
 
 struct pointer {
-	enum moves CC;
 	enum direction DP;
+	enum moves CC;
 };
 
 #endif // !STRUCTS
