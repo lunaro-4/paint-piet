@@ -23,6 +23,8 @@ void test_nerby(int y, int x, int height, int width, int codel_index, int map[][
 
 void fill_2d_map(int height, int width, int map[][width], struct color *matrix[][width], int *n_of_codels, struct codel *codel_array[]);
 
+void find_neighbor_codels(int height, int width, int map[][width], struct codel *codel_array[]);
+
 #endif // !COLORMATRIX
 
 #ifndef CUSTOM_UTILS

@@ -57,10 +57,6 @@ void get_height_and_width(FILE *fptr, int* height, int* width )
 }
 
 
-void check_nearby_codels(int height, int width, struct color *matrix[][width], struct codel *codel_array[])
-{
-}
-
 void test_nerby(int y, int x, int height, int width, int codel_index, int map[][width], struct color *matrix[][width], int *codel_size)
 {
 	/* move across a board and mark points as visited */
@@ -114,15 +110,126 @@ void fill_2d_map(int height, int width, int map[][width], struct color *matrix[]
 			else 
 			{
 				struct codel *codel = malloc(sizeof(struct codel));
-				int corner_coords[4], codel_size;
+				int  codel_size;
 				local_n_of_codels++;
 				test_nerby(y, x, height, width, local_n_of_codels, map, matrix, &codel_size);
 				codel->size = codel_size;
+				codel->color = *mat_col;
 
 				codel_array[local_n_of_codels] = codel;
 			}
 		}
 	}
 	*n_of_codels = local_n_of_codels;
+
+}
+void fill_corner_points (int y, int x, int height, int width, int corner_points[][3])
+{
+	corner_points[0][0] = 0;
+	corner_points[0][1] = y;
+	corner_points[0][2] = y;
+	corner_points[1][0] = 0;
+	corner_points[1][1] = x;
+	corner_points[1][2] = x;
+	corner_points[2][0] = height;
+	corner_points[2][1] = y;
+	corner_points[2][2] = y;
+	corner_points[3][0] = width;
+	corner_points[3][1] = x;
+	corner_points[3][2] = x;
+}
+
+void compare_points (int y, int x, int corner_points[][3])
+{
+	// Rx [Ryr Ryl]
+	if (x > corner_points[0][0]) {
+		corner_points[0][0] = x;
+		corner_points[0][1] = y;
+		corner_points[0][2] = y;  
+	} 
+	else if (x == corner_points[0][0]) 
+	{
+		corner_points[0][1] = min(corner_points[0][1], y);
+		corner_points[0][2] = max(corner_points[0][2], y); 
+	}
+	///
+	//	Dy [Dxr Dxl]
+	///
+	if (y > corner_points[1][0]) {
+		corner_points[1][0] = y;
+		corner_points[1][1] = x;
+		corner_points[1][2] = x;  
+	} else
+		if (y == corner_points[1][0]) 
+		{
+			corner_points[1][1] = max(corner_points[1][1], x);
+			corner_points[1][2] = min(corner_points[1][2], x); 
+		}
+	///
+	//	Lx [Lyr Lyl]
+	/// 
+	if (x < corner_points[2][0]) {
+		corner_points[2][0] = x;
+		corner_points[2][1] = y;
+		corner_points[2][2] = y;  
+	} else
+		if (x == corner_points[2][0]) 
+		{
+			corner_points[2][1] = max(corner_points[2][1], y);
+			corner_points[2][2] = min(corner_points[2][2], y); 
+		}
+	/// 
+	//  Uy [Uxr Uxl
+	///
+	if (y < corner_points[3][0]) {
+		corner_points[3][0] = y;
+		corner_points[3][1] = x;
+		corner_points[3][2] = x;  
+	} else
+		if (y == corner_points[3][0]) 
+		{
+			corner_points[3][1] = min(corner_points[3][1], y);
+			corner_points[3][2] = max(corner_points[3][2], y); 
+		}
+
+}
+void resolve_codel (int height, int width, int y, int x, int map[][width], struct codel *codel, int codel_index)
+{
+	/* corner_points scheme:
+	   0 X+ => Y- Y+
+	   1 Y+ => X+ X-
+	   2 X- => Y+ Y-
+	   3 Y- => X- X+ */	
+	int corner_points[4][3]; // direction => codel
+	// INIT_CORNER_POINTS(corner_points, y, x);
+	fill_corner_points(y, x, height, width, corner_points);
+
+	for (int y = 0; y < height; y++)
+		for (int x = 0; x < width; x++)
+			if (map[y][x] == codel_index) 
+				compare_points(y, x, corner_points);
+
+	for (int i = 0; i < 4; i++)
+		for (int j = 0; j < 3; j++)
+			codel->corner_points[i][j] = corner_points[i][j];
+}
+
+
+void find_neighbor_codels(int height, int width, int map[][width], struct codel *codel_array[])
+{  
+
+	int current_codel_index = 0; 
+
+	for (int y = 0; y < height; y++)
+		for (int x = 0; x < width; x++)
+		{
+			int current_map_value = map[y][x];
+			bool is_not_black_or_white = current_map_value != WHITE_INDEX && current_map_value != BLACK_INDEX;
+			if (is_not_black_or_white && current_codel_index < current_map_value)
+			{
+				current_codel_index = map[y][x];
+				resolve_codel(height, width, y, x, map, codel_array[current_codel_index], current_codel_index);
+			}
+		}
 
 }
