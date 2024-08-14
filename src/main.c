@@ -4,6 +4,124 @@
 #include <time.h>
 
 #define STACK_MAX_SIZE 200
+#define MAX_COLOR 0xff
+#define MID_COLOR 0x00
+
+
+enum piet_hue {
+	RED = 0, YELLOW = 1 , GREEN = 2 , CYAN = 3, BLUE = 4, MAGENTA = 5
+};
+
+enum piet_light {
+	LIGHT, NORMAL, DARK
+};
+
+int get_color_light (struct color *color)
+{
+	if (color->red > 0 && color->green > 0 && color->blue > 0)
+		return LIGHT;
+	else
+	if (color->red < 0xff && color->green < 0xff && color->blue < 0xff)
+		return DARK;
+	else
+		return NORMAL;
+}
+
+int get_color_hue (struct color *color, enum piet_light light)
+{
+	bool red = false, green = false, blue = false;
+	/* TODO:
+	 *	LIGHT == MAX_COLOR
+	 *	NORMAL > MID_COLOR
+	 *	DARK <= MID_COLOR
+	 *	*/
+	switch (light) {
+		case LIGHT:
+			;
+		case NORMAL:
+			if (color->red == MAX_COLOR)
+				red = true;
+			if (color->green == MAX_COLOR)
+				green = true;
+			if (color->blue == MAX_COLOR)
+				blue = true;
+			break;
+		case DARK:
+			if (color->red >= MID_COLOR)
+				red = true;
+			if (color->green >= MID_COLOR)
+				green = true;
+			if (color->blue >= MID_COLOR)
+				blue = true;
+
+	}
+	// int result = 0;
+
+	/* if (red)
+		result += RED;
+	if (green)
+		result += GREEN;
+	if (blue)
+		result += BLUE; */
+
+	if (red && green)
+		return YELLOW;
+	if (green && blue)
+		return CYAN;
+	if (blue && red)
+		return MAGENTA;
+	if (red)
+		return RED;
+	if (green)
+		return GREEN;
+	if (blue)
+		return BLUE;
+
+	perror("No hue match found!");
+	return NULL;
+
+}
+
+void count_steps (struct color *a, struct color *b, int *hue_steps, int *light_steps)
+{
+	*hue_steps = *light_steps = 0;
+
+	enum piet_hue a_hue = 0, b_hue = 0;
+	enum piet_light a_light = 0, b_light = 0;
+
+	a_light = get_color_light(a);
+	b_light = get_color_light(b);
+
+	a_hue = get_color_hue(a, a_light);
+	b_hue = get_color_hue(b, b_light);
+
+	int local_hue_steps = b_hue - a_hue,
+		local_light_steps = b_light - a_light;
+
+	if (local_light_steps < 0)
+		local_light_steps += 2;
+
+	*light_steps = local_light_steps;
+
+	if (local_hue_steps < 0)
+		local_hue_steps += 5;
+
+	*hue_steps = local_hue_steps;
+
+
+
+	/* int r_diff = a->red - b->red, g_diff = a->green - b->green, b_diff = a->blue - a->blue;
+
+	if ((r_diff >= 0 && g_diff >= 0) || (g_diff >= 0 && b_diff >= 0) || (b_diff >= 0 && r_diff >= 0))
+	{
+		++*hue_steps;
+	} */
+
+}
+
+
+
+
 
 
 int main(int argc, char *argv[])

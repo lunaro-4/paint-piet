@@ -78,7 +78,6 @@ void process_pointer(int *y, int *x, int height, int width, int map[][width], st
 
 	if (!bumped && next_codel_id == WHITE_INDEX)
 	{
-		perror("Its white!");
 		bool is_white = true;
 		int local_x = *x, local_y = *y;
 		while (is_white)
@@ -89,7 +88,6 @@ void process_pointer(int *y, int *x, int height, int width, int map[][width], st
 			local_x = new_x;
 			is_white = map[local_y][local_x] == WHITE_INDEX;
 		} 
-		// printf("whited x: %i, whited y: %i \t", local_x, local_y);
 		*y = local_y;
 		*x = local_x;
 		return;
@@ -99,7 +97,6 @@ void process_pointer(int *y, int *x, int height, int width, int map[][width], st
 	if (bumped)
 	{
 		chosen_codel =  codel_array[current_codel_id];
-		// bumps++;
 	}
 	else 
 	{
