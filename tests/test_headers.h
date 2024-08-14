@@ -17,11 +17,17 @@ static struct colors_case {
 	char file_name[100];
 } colors_cases[3];
 
+static struct codels_case {
+	struct codel codels[100];
+	char file_name[100];
+} codels_cases[1];
+
 struct parsing_case* new_parsing_case(int height, int width, char *filename);
 
 Suite * parameter_parsing (void);
 Suite * color_parsing (void);
 Suite * color_comparison (void);
+Suite * codels (void);
 // Suite * parameter_parsing (void);
 
 

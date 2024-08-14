@@ -1,8 +1,10 @@
 #include "test_defs.h"
+#include "test_headers.h"
 #include <check.h>
 
 void fill_parsing_cases();
 void fill_colors_cases();
+void fill_codels_cases();
 
 Suite * parameter_parsing (void)
 {
@@ -47,6 +49,19 @@ Suite * color_comparison (void)
 	return s;
 }
 
+Suite * codels (void)
+{
+	fill_codels_cases();
+
+	Suite *s;
+	s = suite_create("Codels");
+	TCase *tc_core = tcase_create("Codels_cases");
+
+	tcase_add_loop_test(tc_core, test_codels, 0, (sizeof codels_cases / sizeof codels_cases[0])); 
+	suite_add_tcase(s, tc_core);
+
+	return s;
+}
 
 
 struct parsing_case* new_parsing_case(int height, int width, char *filename)
@@ -119,5 +134,34 @@ void fill_colors_cases()
 	colors_cases[0] = case_one;
 	colors_cases[1] = case_two;
 	colors_cases[2] = case_three;
+}
+
+void fill_codels_cases()
+{
+	static struct codels_case case_one = {
+		{
+			{1, {0xff, 0xc0, 0xc0}, {{0, 0, 0}, {0, 0, 0}, {0, 0, 0,}, {0, 0, 0}}},
+			{1, {0xff, 0x00, 0x00}, {{1, 0, 0}, {0, 1, 1}, {1, 0, 0,}, {0, 1, 1}}}
+		},
+		"Endless.png" };
+	static struct codels_case case_two = {
+		{
+			/* do not forget to rearrange these, if you change ENUM values */
+					/* "\t			Rx Ryr Ryl  Dy Dxr Dxl Lx Lry Lyl Uy Uxr Uxl \n"*/
+			{2, {0xff, 0xc0, 0xc0}, {{0, 0, 1}, {1, 0, 0}, {0, 1, 0}, {0, 0, 0}}},
+			{2, {0xff, 0x00, 0x00}, {{1, 0, 1}, {1, 1, 1}, {1, 1, 0}, {0, 1, 1}}},
+			{2, {0xc0, 0x00, 0x00}, {{2, 0, 1}, {1, 2, 2}, {2, 1, 0}, {0, 2, 2}}},
+			{2, {0xc0, 0xc0, 0x00}, {{3, 0, 1}, {1, 3, 3}, {3, 1, 0}, {0, 3, 3}}},
+			{2, {0xff, 0xc0, 0xc0}, {{4, 0, 1}, {1, 4, 4}, {4, 1, 0}, {0, 4, 4}}},
+
+			{3, {0xff, 0xc0, 0xc0}, {{8, 3, 3}, {3, 8, 6}, {6, 3, 3}, {3, 6, 8}}},
+		},
+		"Add.png" };
+
+	codels_cases[0] = case_two;
+
+
+	
+
 }
 

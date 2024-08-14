@@ -22,6 +22,7 @@ void get_file(FILE **fptr, char file_name[])
 	{
 		char msg[1030];
 		sprintf(msg, "Error opening file: %s", rel_path);
+		perror(msg);
 		logger(msg);
 		// logger("Error opening file!");
 	}
@@ -107,6 +108,83 @@ START_TEST(test_compare)
 	ck_assert(!is_same_color(&color_2, &color_1));
 	ck_assert(!is_same_color(&color_1, &color_3));
 	ck_assert(!is_same_color(&color_3, &color_black));
+
+}
+END_TEST
+
+START_TEST(test_codels)
+{
+	struct codels_case test_case = codels_cases[_i];
+	static FILE* fptr;
+	int height, width;
+	get_file(&fptr, test_case.file_name);
+
+	if (!fptr) perror("Bad file");
+	get_height_and_width(fptr, &height, &width);
+
+	fclose(fptr);
+	get_file(&fptr, test_case.file_name);
+
+	struct color *matrix[height][width];
+
+	for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width  ; j++ ) {
+			static struct color *c;
+			c = malloc(sizeof(struct color));
+			matrix[i][j] = c;
+		}
+	}
+
+	int fails = 0;
+	create_matrix(fptr, width, height, matrix);
+	
+	int map[height][width], n_of_codels;
+
+	for (int y = 0; y < height; y++)
+		for (int x = 0; x < width; x++)
+			map[y][x] = -1;
+	struct codel *codel_array[CODEL_ARRAY_SIZE];
+	fill_2d_map(height, width, map, matrix, &n_of_codels, codel_array);
+	
+	find_codels_corner_points(height, width, map, codel_array);
+
+	for (int n = 2; n < n_of_codels + 1; n++)
+	{
+		int (*points_real)[3] = codel_array[n]->corner_points;
+		int (*points_assert)[3] = test_case.codels[n-2].corner_points;
+
+		for (int i = 0; i < 4; i++)
+			for (int j = 0; j < 3; j++)
+			{
+				int expect = points_real[i][j], assert = points_assert[i][j];
+				if (expect == assert )
+					continue;
+				char msg[200], * direction;
+				switch (i) {
+					case DP_RIGHT:
+						direction = "RIGHT";
+						break;
+					case DP_DOWN:
+						direction = "DOWN";
+						break;
+					case DP_LEFT:
+						direction = "LEFT";
+						break;
+					case DP_UP:
+						direction = "UP";
+						break;
+				}
+				sprintf(msg, "Case %i fail at:\tCodel: %i, direction: %s, index: %i\t %i != %i", _i, n, direction, j, expect, assert);
+				perror(msg);
+				fails++;
+
+			}
+	}
+
+	ck_assert_int_eq(fails, 0);
+
+
+
 
 }
 END_TEST

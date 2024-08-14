@@ -24,7 +24,8 @@ target_link_libraries (tests ${PNG_LIBRARIES})
 add_test(NAME test_params COMMAND ${PROJECT_SOURCE_DIR}/out/tests params )
 add_test(NAME test_colors COMMAND ${PROJECT_SOURCE_DIR}/out/tests colors )
 add_test(NAME test_compare COMMAND ${PROJECT_SOURCE_DIR}/out/tests compare )
-set_tests_properties(test_params test_colors test_compare PROPERTIES TIMEOUT 30) 
+add_test(NAME test_codels COMMAND ${PROJECT_SOURCE_DIR}/out/tests codels )
+set_tests_properties(test_params test_colors test_compare test_codels PROPERTIES TIMEOUT 30) 
 
 
 include(FindValgrind)
