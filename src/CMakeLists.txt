@@ -1,2 +1,2 @@
-add_executable(main main.c colormatrix.c custom_utils.c)
+add_executable(main main.c colormatrix.c custom_utils.c runtime.c)
 target_link_libraries (main ${PNG_LIBRARIES})
