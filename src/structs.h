@@ -12,6 +12,23 @@ enum moves {
 enum direction {
 	 DP_RIGHT = 0, DP_DOWN = 1, DP_LEFT = 2, DP_UP = 3
 };
+
+enum piet_hue {
+	RED = 0, YELLOW = 1 , GREEN = 2 , CYAN = 3, BLUE = 4, MAGENTA = 5
+};
+
+enum piet_light {
+	LIGHT, NORMAL, DARK
+};
+
+enum piet_action {
+	PUSH, POP,
+	ADD, SUBSTRACT, MULTIPLY,
+	DIVIDE, MODULO, NOT,
+	GREATER, POINTER, SWITCH,
+	DUPLICATE, ROLL, INPUT_NUM,
+	INPUT_CHAR, OUTPUT_NUM, OUTPUT_CHAR
+};
 #endif // !ENUMS
 
 #ifndef STRUCTS
@@ -78,7 +95,4 @@ p_dm = {0xc0, 0x00, 0xc0};
 #define max(x, y) ((x > y) ? x : y)
 #define min(x, y) ((x < y) ? x : y)
 
-#define INIT_CORNER_POINTS(corner_points, y, x)  corner_points[0][0] = y; corner_points[0][1] = y; corner_points[1][0] = x; corner_points[1][1] = x; corner_points[2][0] = y; corner_points[2][1] = y; corner_points[3][0] = x; corner_points[3][1] = x;
-
-#define RESOLVE_CORNER_POINTS(corner_points, y, x) corner_points[0][0] = min(corner_points[0][0], y); corner_points[0][1] = max(corner_points[0][0], y); corner_points[1][0] = max(corner_points[0][0], x); corner_points[1][1] = min(corner_points[0][0], x); corner_points[2][0] = max(corner_points[0][0], y); corner_points[2][1] = min(corner_points[0][0], y); corner_points[3][0] = min(corner_points[0][0], x); corner_points[3][1] = max(corner_points[0][0], x);
 #endif // !CONSTS

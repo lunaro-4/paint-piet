@@ -55,4 +55,13 @@ void process_pointer(int *y, int *x, int height, int width, int map[][width], st
 
 #endif // !RUNTIME
 
+#ifndef PIET_COMMANDS
+#define PIET_COMMANDS
+
+int choose_light_actions (int hue_steps);
+int choose_normal_actions (int hue_steps);
+int choose_dark_actions (int hue_steps);
+
+#endif // !PIET_COMMANDS
+
 
