@@ -5,7 +5,6 @@
 #include <stdlib.h>
 #include "structs.h"
 #include <dirent.h>
-#include <stdbool.h>
 // #include "custom_utils.h"
 
 #endif // !HEADRERS

@@ -1,3 +1,4 @@
+#include <stdbool.h>
 #include <stdint.h>
 
 
@@ -5,7 +6,7 @@
 #define ENUMS
 
 enum moves {
-	CC_LEFT = 0, CC_RIGHT = 1
+	CC_LEFT = 1, CC_RIGHT = 2
 };
 
 enum direction {
@@ -37,8 +38,10 @@ struct codel {
 };
 
 struct pointer {
+	int codels[2]; // old & new
 	enum direction DP;
 	enum moves CC;
+	bool cc_switched;
 };
 
 #endif // !STRUCTS

@@ -154,71 +154,71 @@ void fill_2d_map(int height, int width, int map[][width], struct color *matrix[]
 }
 void fill_corner_points (int y, int x, int height, int width, int corner_points[][3])
 {
-	corner_points[0][0] = 0;
-	corner_points[0][1] = y;
-	corner_points[0][2] = y;
-	corner_points[1][0] = 0;
-	corner_points[1][1] = x;
-	corner_points[1][2] = x;
-	corner_points[2][0] = height;
-	corner_points[2][1] = y;
-	corner_points[2][2] = y;
-	corner_points[3][0] = width;
-	corner_points[3][1] = x;
-	corner_points[3][2] = x;
+	corner_points[DP_RIGHT][0] = 0;
+	corner_points[DP_RIGHT][1] = y;
+	corner_points[DP_RIGHT][2] = y;
+	corner_points[DP_DOWN][0] = 0;
+	corner_points[DP_DOWN][1] = x;
+	corner_points[DP_DOWN][2] = x;
+	corner_points[DP_LEFT][0] = width;
+	corner_points[DP_LEFT][1] = y;
+	corner_points[DP_LEFT][2] = y;
+	corner_points[DP_UP][0] = height;
+	corner_points[DP_UP][1] = x;
+	corner_points[DP_UP][2] = x;
 }
 
 void compare_points (int y, int x, int corner_points[][3])
 {
 	// Rx [Ryr Ryl]
-	if (x > corner_points[0][0]) {
-		corner_points[0][0] = x;
-		corner_points[0][1] = y;
-		corner_points[0][2] = y;  
+	if (x > corner_points[DP_RIGHT][0]) {
+		corner_points[DP_RIGHT][0] = x;
+		corner_points[DP_RIGHT][1] = y;
+		corner_points[DP_RIGHT][2] = y;  
 	} 
-	else if (x == corner_points[0][0]) 
+	else if (x == corner_points[DP_RIGHT][0]) 
 	{
-		corner_points[0][1] = min(corner_points[0][1], y);
-		corner_points[0][2] = max(corner_points[0][2], y); 
+		corner_points[DP_RIGHT][1] = min(corner_points[DP_RIGHT][1], y);
+		corner_points[DP_RIGHT][2] = max(corner_points[DP_RIGHT][2], y); 
 	}
 	///
 	//	Dy [Dxr Dxl]
 	///
-	if (y > corner_points[1][0]) {
-		corner_points[1][0] = y;
-		corner_points[1][1] = x;
-		corner_points[1][2] = x;  
+	if (y > corner_points[DP_DOWN][0]) {
+		corner_points[DP_DOWN][0] = y;
+		corner_points[DP_DOWN][1] = x;
+		corner_points[DP_DOWN][2] = x;  
 	} else
-		if (y == corner_points[1][0]) 
+		if (y == corner_points[DP_DOWN][0]) 
 		{
-			corner_points[1][1] = max(corner_points[1][1], x);
-			corner_points[1][2] = min(corner_points[1][2], x); 
+			corner_points[DP_DOWN][1] = max(corner_points[DP_DOWN][1], x);
+			corner_points[DP_DOWN][2] = min(corner_points[DP_DOWN][2], x); 
 		}
 	///
 	//	Lx [Lyr Lyl]
 	/// 
-	if (x < corner_points[2][0]) {
-		corner_points[2][0] = x;
-		corner_points[2][1] = y;
-		corner_points[2][2] = y;  
+	if (x < corner_points[DP_LEFT][0]) {
+		corner_points[DP_LEFT][0] = x;
+		corner_points[DP_LEFT][1] = y;
+		corner_points[DP_LEFT][2] = y;  
 	} else
-		if (x == corner_points[2][0]) 
+		if (x == corner_points[DP_LEFT][0]) 
 		{
-			corner_points[2][1] = max(corner_points[2][1], y);
-			corner_points[2][2] = min(corner_points[2][2], y); 
+			corner_points[DP_LEFT][1] = max(corner_points[DP_LEFT][1], y);
+			corner_points[DP_LEFT][2] = min(corner_points[DP_LEFT][2], y); 
 		}
 	/// 
 	//  Uy [Uxr Uxl
 	///
-	if (y < corner_points[3][0]) {
-		corner_points[3][0] = y;
-		corner_points[3][1] = x;
-		corner_points[3][2] = x;  
+	if (y < corner_points[DP_UP][0]) {
+		corner_points[DP_UP][0] = y;
+		corner_points[DP_UP][1] = x;
+		corner_points[DP_UP][2] = x;  
 	} else
-		if (y == corner_points[3][0]) 
+		if (y == corner_points[DP_UP][0]) 
 		{
-			corner_points[3][1] = min(corner_points[3][1], y);
-			corner_points[3][2] = max(corner_points[3][2], y); 
+			corner_points[DP_UP][1] = min(corner_points[DP_UP][1], x);
+			corner_points[DP_UP][2] = max(corner_points[DP_UP][2], x); 
 		}
 
 }
