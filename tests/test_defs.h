@@ -3,6 +3,7 @@
 #include <check.h>
 #include <stdio.h>
 #include <string.h>
+#define CODEL_ARRAY_SIZE 500
 
 #ifndef GET_FILE
 #define GET_FILE 

@@ -68,7 +68,7 @@ int main(int argc, char *argv[])
 	while (bumps < 8) // DP should see all 4 directions
 	{
 		process_pointer(&current_y, &current_x, height, width, map, &pointer, codel_array, &bumps);
-		process_move(codel_array, &pointer, stack, &stack_ptr);
+		// process_move(codel_array, &pointer, stack, &stack_ptr);
 		// printf("codel: %2i, x %2i, y %2i, DP: %2i, CC: %2i\t", pointer.codels[1], current_x, current_y, pointer.DP, pointer.CC);
 		// printf("bumped: %i\n", bumps);
 	}

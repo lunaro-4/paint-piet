@@ -3,8 +3,6 @@
 #include "pngconf.h"
 #include <stdio.h>
 
-#define WHITE_INDEX 1
-#define BLACK_INDEX 0
 
 #define min(a, b) ((a < b) ? a : b)
 #define max(a, b) ((a > b) ? a : b)
@@ -99,7 +97,7 @@ void test_nerby(int y, int x, int height, int width, int codel_index, int map[][
 	if (map[y][x] == -1)
 	{
 		map[y][x] = codel_index;
-		codel_size++;
+		++*codel_size;
 	}
 	int around[4][2] = {
 		{y, x + 1},
@@ -146,7 +144,7 @@ void fill_2d_map(int height, int width, int map[][width], struct color *matrix[]
 			else 
 			{
 				struct codel *codel = malloc(sizeof(struct codel));
-				int  codel_size;
+				int codel_size = 0;
 				local_n_of_codels++;
 				test_nerby(y, x, height, width, local_n_of_codels, map, matrix, &codel_size);
 				codel->size = codel_size;

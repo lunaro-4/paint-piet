@@ -4,6 +4,9 @@
 #define PAINT_PIET_LIBRARY
 
 #define STACK_MAX_SIZE 200
+#define WHITE_INDEX 1
+#define BLACK_INDEX 0
+
 enum piet_hue {
 	PIET_RED = 0, PIET_YELLOW = 1 , PIET_GREEN = 2 , PIET_CYAN = 3, PIET_BLUE = 4, PIET_MAGENTA = 5
 };
