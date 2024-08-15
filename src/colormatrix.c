@@ -3,6 +3,13 @@
 #include "pngconf.h"
 #include <stdio.h>
 
+#define WHITE_INDEX 1
+#define BLACK_INDEX 0
+
+#define min(a, b) ((a < b) ? a : b)
+#define max(a, b) ((a > b) ? a : b)
+
+
 void parse_RGB(int width, int height, struct color *matrix[height][width], png_bytepp png_rows)
 {
 	for (int i = 0; i < height; i++) 

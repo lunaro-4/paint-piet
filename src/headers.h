@@ -3,7 +3,6 @@
 #include <png.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "structs.h"
 #include <dirent.h>
 #include "paint-piet.h"
 // #include "custom_utils.h"
@@ -55,14 +54,4 @@ void print_codel_array_corner_points(struct codel *codel_array[], int n_of_codel
 void process_pointer(int *y, int *x, int height, int width, int map[][width], struct pointer *pointer, struct codel *codel_array[], int *bumps);
 
 #endif // !RUNTIME
-
-#ifndef PIET_COMMANDS
-#define PIET_COMMANDS
-
-int choose_light_actions (int hue_steps);
-int choose_normal_actions (int hue_steps);
-int choose_dark_actions (int hue_steps);
-
-#endif // !PIET_COMMANDS
-
 

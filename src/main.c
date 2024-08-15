@@ -5,6 +5,7 @@
 
 
 
+#define CODEL_ARRAY_SIZE 500
 
 
 int main(int argc, char *argv[])
@@ -89,4 +90,5 @@ int main(int argc, char *argv[])
 	free_2d_colors(height, width, matrix);
 	return 0;
 }
+#define CODEL_ARRAY_SIZE 500
 
