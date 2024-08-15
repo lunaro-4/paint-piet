@@ -65,15 +65,36 @@ int main(int argc, char *argv[])
 
 	// for (int i = 0; i < 50; i++)
 	int stack[STACK_MAX_SIZE], *stack_ptr = stack;
+	int debug_action_count = 0;
+	const int DEBUG_FIRE = -1;
 	while (bumps < 8) // DP should see all 4 directions
 	{
-		process_pointer(&current_y, &current_x, height, width, map, &pointer, codel_array, &bumps);
+		debug_action_count++;
+		bool white_skip = false, white_encountered = process_pointer(&current_y, &current_x, height, width, map, &pointer, codel_array, &bumps);
+		if (white_encountered)
+		{
+			white_skip = true;
+			continue;
+		}
+		if (white_skip)
+		{
+			white_skip = false;
+			continue;
+		}
 		if (bumps == 0)
 		{
 			int hue_steps, light_steps;
 			struct codel *from = codel_array[pointer.codels[0]], *to = codel_array[pointer.codels[1]];
 			count_steps(&from->color, &to->color, &hue_steps, &light_steps);
-			// _piet_debug(hue_steps, light_steps);
+			
+
+			if (DEBUG_FIRE > -1 && debug_action_count >= DEBUG_FIRE)
+			{
+				printf("\ncodel.id: from: %i, to: %i\n", pointer.codels[0], pointer.codels[1]);
+				printf("codel.size: from: %i, to: %i\n", from->size, to->size);
+				_piet_debug(hue_steps, light_steps);
+				print_int_array(stack, stack_ptr - stack);
+			}
 			
 			process_move(hue_steps, light_steps, from->size, &pointer, stack, &stack_ptr);
 		}

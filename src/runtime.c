@@ -66,7 +66,7 @@ bool move_pointer(int *y, int *x, int *new_y, int *new_x, int height, int width,
 	return false;
 }
 
-void process_pointer(int *y, int *x, int height, int width, int map[][width], struct pointer *pointer, struct codel *codel_array[], int *bumps)
+bool process_pointer(int *y, int *x, int height, int width, int map[][width], struct pointer *pointer, struct codel *codel_array[], int *bumps)
 {
 
 	int new_y, new_x;
@@ -94,7 +94,7 @@ void process_pointer(int *y, int *x, int height, int width, int map[][width], st
 		} 
 		*y = local_y;
 		*x = local_x;
-		return;
+		return true;
 	}
 
 	struct codel *chosen_codel;
@@ -120,6 +120,8 @@ void process_pointer(int *y, int *x, int height, int width, int map[][width], st
 		*y = chosen_codel->corner_points[*dp][0];
 		*x = chosen_codel->corner_points[*dp][*cc];
 	}
+
+	return false;
 
 	
 }

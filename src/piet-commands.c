@@ -73,7 +73,9 @@ void rotate_pointer(struct pointer *pointer, int rotation_times)
 	enum direction *dp = &pointer->DP;
 
 	if (clockwise)
+	{
 		for (int i = 0; i < rotation_times; i++)
+		{
 			switch (*dp) {
 				case DP_RIGHT:
 					*dp = DP_DOWN;
@@ -88,7 +90,11 @@ void rotate_pointer(struct pointer *pointer, int rotation_times)
 					*dp = DP_RIGHT;
 					break;
 			}
+		}
+	}
 	else
+	{
+		rotation_times *= -1;
 		for (int i = 0; i < rotation_times; i++)
 			switch (*dp) {
 				case DP_RIGHT:
@@ -104,6 +110,7 @@ void rotate_pointer(struct pointer *pointer, int rotation_times)
 					*dp = DP_LEFT;
 					break;
 			}
+	}
 }
 
 void switch_pointer (struct pointer *pointer, int switch_times)
@@ -127,14 +134,14 @@ int piet_push(int stack[], int **stack_ptr, int push_value)
 		perror("PUSH: Stack boundry reached!");
 		return 1;
 	}
-	(*stack_ptr)++;
 	**stack_ptr = push_value;
+	(*stack_ptr)++;
 	return 0;
 }
 
 int piet_pop(int stack[], int **stack_ptr)
 {
-	if (*stack_ptr - stack < 0)
+	if (*stack_ptr - stack <= 0)
 	{
 		perror("POP: Stack boundry reached!");
 		return 1;
@@ -146,9 +153,12 @@ int piet_pop(int stack[], int **stack_ptr)
 
 int piet_add(int stack[], int **stack_ptr)
 {
-	int value_1 = **(stack_ptr), value_2 = *(*(stack_ptr) - 1);
+	int *local_ptr = (*stack_ptr) - 1;
+	int value_1 = *(local_ptr), value_2 = *(local_ptr - 1);
+	int result = value_2 + value_1;
 	piet_pop(stack, stack_ptr);
-	**stack_ptr = value_1 + value_2;
+	piet_pop(stack, stack_ptr);
+	piet_push(stack, stack_ptr, result);
 	return 0;
 
 }
@@ -156,32 +166,44 @@ int piet_add(int stack[], int **stack_ptr)
 int piet_substract (int stack[], int **stack_ptr)
 {
 	// note the order
-	int value_1 = **(stack_ptr), value_2 = *(*(stack_ptr) - 1);
+	int *local_ptr = (*stack_ptr) - 1;
+	int value_1 = *(local_ptr), value_2 = *(local_ptr - 1);
+	int result = value_2 - value_1;
 	piet_pop(stack, stack_ptr);
-	**stack_ptr = value_2 - value_1;
+	piet_pop(stack, stack_ptr);
+	piet_push(stack, stack_ptr, result);
 	return 0;
 }
 int piet_multiply (int stack[], int **stack_ptr)
 {
-	int value_1 = **(stack_ptr), value_2 = *(*(stack_ptr) - 1);
+	int *local_ptr = (*stack_ptr) - 1;
+	int value_1 = *(local_ptr), value_2 = *(local_ptr - 1);
+	int result = value_1 * value_2;
 	piet_pop(stack, stack_ptr);
-	**stack_ptr = value_1 * value_2;
+	piet_pop(stack, stack_ptr);
+	piet_push(stack, stack_ptr, result);
 	return 0;
 }
 int piet_divide (int stack[], int **stack_ptr)
 {
 	// note the order
-	int value_1 = **(stack_ptr), value_2 = *(*(stack_ptr) - 1);
+	int *local_ptr = (*stack_ptr) - 1;
+	int value_1 = *(local_ptr), value_2 = *(local_ptr - 1);
+	int result = value_2 / value_1;
 	piet_pop(stack, stack_ptr);
-	**stack_ptr = value_2 / value_1;
+	piet_pop(stack, stack_ptr);
+	piet_push(stack, stack_ptr, result);
 	return 0;
 }
 int piet_modulo (int stack[], int **stack_ptr)
 {
 	// note the order
-	int value_1 = **(stack_ptr), value_2 = *(*(stack_ptr) - 1);
+	int *local_ptr = (*stack_ptr) - 1;
+	int value_1 = *(local_ptr), value_2 = *(local_ptr - 1);
+	int result = value_2 % value_1;
 	piet_pop(stack, stack_ptr);
-	**stack_ptr = value_2 % value_1;
+	piet_pop(stack, stack_ptr);
+	piet_push(stack, stack_ptr, result);
 	return 0;
 }
 
@@ -194,39 +216,45 @@ int piet_not (int stack[], int **stack_ptr)
 int piet_greater (int stack[], int **stack_ptr)
 {
 	// note the order
-	int value_1 = **(stack_ptr), value_2 = *(*(stack_ptr) - 1);
+	int *local_ptr = (*stack_ptr) - 1;
+	int value_1 = *(local_ptr), value_2 = *(local_ptr - 1);
+	int result = value_2 > value_1;
 	piet_pop(stack, stack_ptr);
-	**stack_ptr = value_2 > value_1;
+	piet_pop(stack, stack_ptr);
+	piet_push(stack, stack_ptr, result);
 	return 0;
 }
 
 int piet_pointer (int stack[], int **stack_ptr, struct pointer *pointer)
 {
-	int value = **stack_ptr;
-	piet_pop(stack, stack_ptr);
+	int value = *(*stack_ptr - 1);
 	rotate_pointer(pointer, value);
+	piet_pop(stack, stack_ptr);
 	return 0;
 }
 
 int piet_switch (int stack[], int **stack_ptr, struct pointer *pointer)
 {
 	int value = **stack_ptr;
-	piet_pop(stack, stack_ptr);
 	if (value < 0) value *= -1;
 	switch_pointer(pointer, value);
+	piet_pop(stack, stack_ptr);
 	return 0;
 }
 
 int piet_duplicate (int stack[], int **stack_ptr)
 {
-	piet_push(stack, stack_ptr, **stack_ptr);
+	int value = *(*(stack_ptr) -1);
+	piet_push(stack, stack_ptr, value);
 	return 0;
 }
 int piet_roll (int stack[], int **stack_ptr)
 {
 	int temp_stack[STACK_MAX_SIZE], temp_temp_stack[STACK_MAX_SIZE+1];
 	
-	int rolls = **stack_ptr, depth = *(*(stack_ptr) - 1);
+	int *local_ptr = (*stack_ptr) - 1;
+	int value_1 = *(local_ptr), value_2 = *(local_ptr - 1);
+	int rolls = value_1 + 0, depth = value_2 + 0;
 	if (*stack_ptr - stack < rolls)
 	{
 		perror("Requested n of rolls is greater then current stack size");
@@ -249,6 +277,8 @@ int piet_roll (int stack[], int **stack_ptr)
 		for (int j = 0; j < depth; j++)
 			temp_stack[j] = temp_stack[j];
 	}
+	// for (int i = depth - 1; i >= 0; i--)
+	// 	piet_push(stack, stack_ptr, temp_stack[i]);
 	for (int i = 0; i < depth; i++)
 		piet_push(stack, stack_ptr, temp_stack[i]);
 
@@ -286,13 +316,13 @@ int piet_input_char (int stack[], int **stack_ptr)
 
 int piet_output_char (int stack[], int **stack_ptr)
 {
-	putchar(**stack_ptr);
+	putchar(*(*stack_ptr -1));
 	piet_pop(stack, stack_ptr);
 	return 0;
 }
 int piet_output_num (int stack[], int **stack_ptr)
 {
-	printf("%i", **stack_ptr);
+	printf("%i", *(*stack_ptr -1));
 	piet_pop(stack, stack_ptr);
 	return 0;
 }

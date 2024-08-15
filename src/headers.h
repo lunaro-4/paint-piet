@@ -46,12 +46,14 @@ bool is_white(struct color *col);
 void print_codel_array_colors(struct codel *codel_array[], int n_of_codels);
 
 void print_codel_array_corner_points(struct codel *codel_array[], int n_of_codels);
+
+void print_int_array(int arr[], int arr_len);
 #endif // !CUSTOM_UTILS
 
 #ifndef RUNTIME
 #define RUNTIME
 
-void process_pointer(int *y, int *x, int height, int width, int map[][width], struct pointer *pointer, struct codel *codel_array[], int *bumps);
+bool process_pointer(int *y, int *x, int height, int width, int map[][width], struct pointer *pointer, struct codel *codel_array[], int *bumps);
 
 #endif // !RUNTIME
 
