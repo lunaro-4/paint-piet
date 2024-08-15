@@ -1,5 +1,6 @@
 #include "headers.h"
 #include "paint-piet.h"
+#include <stdio.h>
 
 
 
@@ -121,6 +122,11 @@ void switch_pointer (struct pointer *pointer, int switch_times)
 
 int piet_push(int stack[], int **stack_ptr, int push_value)
 {
+	if (*stack_ptr - stack +1 > STACK_MAX_SIZE)
+	{
+		perror("PUSH: Stack boundry reached!");
+		return 1;
+	}
 	(*stack_ptr)++;
 	**stack_ptr = push_value;
 	return 0;
@@ -128,6 +134,11 @@ int piet_push(int stack[], int **stack_ptr, int push_value)
 
 int piet_pop(int stack[], int **stack_ptr)
 {
+	if (*stack_ptr - stack < 0)
+	{
+		perror("POP: Stack boundry reached!");
+		return 1;
+	}
 	**stack_ptr = 0;
 	(*stack_ptr)--;
 	return 0;
@@ -286,6 +297,65 @@ int piet_output_num (int stack[], int **stack_ptr)
 	return 0;
 }
 
+int _piet_debug (enum piet_action command, struct pointer *pointer, int codel_value, int stack[], int **stack_ptr)
+{
+	switch (command) {
+		case PIET_PUSH:
+			printf("Performing %s", "command");
+			break;
+		case PIET_POP:
+			printf("Performing %s", "command");
+			break;
+		case PIET_ADD:
+			printf("Performing %s", "command");
+			break;
+		case PIET_SUBSTRACT:
+			printf("Performing %s", "command");
+			break;
+		case PIET_MULTIPLY:
+			printf("Performing %s", "command");
+			break;
+		case PIET_DIVIDE:
+			printf("Performing %s", "command");
+			break;
+		case PIET_MODULO:
+			printf("Performing %s", "command");
+			break;
+		case PIET_NOT:
+			printf("Performing %s", "command");
+			break;
+		case PIET_GREATER:
+			printf("Performing %s", "command");
+			break;
+		case PIET_POINTER:
+			printf("Performing %s", "command");
+			break;
+		case PIET_SWITCH:
+			printf("Performing %s", "command");
+			break;
+		case PIET_DUPLICATE:
+			printf("Performing %s", "command");
+			break;
+		case PIET_ROLL:
+			printf("Performing %s", "command");
+			break;
+		case PIET_INPUT_NUM:
+			printf("Performing %s", "command");
+			break;
+		case PIET_INPUT_CHAR:
+			printf("Performing %s", "command");
+			break;
+		case PIET_OUTPUT_NUM:
+			printf("Performing %s", "command");
+			break;
+		case PIET_OUTPUT_CHAR:
+			printf("Performing %s", "command");
+			break;
+
+	}
+
+	return 0;
+}
 int process_piet (enum piet_action command, struct pointer *pointer, int codel_value, int stack[], int **stack_ptr)
 {
 	switch (command) {
@@ -328,15 +398,16 @@ int process_piet (enum piet_action command, struct pointer *pointer, int codel_v
 
 	return 0;
 }
-void process_move (struct codel *codel_array[], struct pointer *pointer, int stack[], int **stack_ptr)
+void process_move (int hue_steps, int light_steps, int codel_value, struct pointer *pointer, int stack[], int **stack_ptr)
 {
-	int hue_steps, light_steps;
+	// int hue_steps, light_steps;
+	//
+	// struct codel from = *codel_array[pointer->codels[0]], to = *codel_array[pointer->codels[1]];
+	// count_steps(&from.color, &to.color, &hue_steps, &light_steps);
 
-	struct codel from = *codel_array[pointer->codels[0]], to = *codel_array[pointer->codels[1]];
-	count_steps(&from.color, &to.color, &hue_steps, &light_steps);
-
-	int	res = 0, codel_value = from.size;
+	int	res = 0;
 	
+	printf("steps: hue: %i, light: %i\n", hue_steps, light_steps);
 
 
 	enum piet_action command;

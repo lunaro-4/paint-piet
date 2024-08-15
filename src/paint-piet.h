@@ -12,7 +12,7 @@ enum piet_hue {
 };
 
 enum piet_light {
-	PIET_LIGHT, PIET_NORMAL, PIET_DARK
+	PIET_LIGHT = 0, PIET_NORMAL, PIET_DARK
 };
 
 enum piet_action {
@@ -55,15 +55,17 @@ void count_steps (struct color *a, struct color *b, int *hue_steps, int *light_s
 
 int process_piet (enum piet_action command, struct pointer *pointer, int codel_value, int stack[], int **stack_ptr);
 
-void process_move (struct codel *codel_array[], struct pointer *pointer, int stack[], int **stack_ptr);
+// void process_move (struct codel *codel_array[], struct pointer *pointer, int stack[], int **stack_ptr);
+
+void process_move (int hue_steps, int light_steps, int codel_value, struct pointer *pointer, int stack[], int **stack_ptr);
 
 #endif // !PAINT_PIET_LIBRARY
 #ifndef PIET_COMMANDS
 #define PIET_COMMANDS
-/*
 int choose_light_actions (int hue_steps);
 int choose_normal_actions (int hue_steps);
 int choose_dark_actions (int hue_steps);
+/*
 void rotate_pointer(struct pointer *pointer, int rotation_times);
 void switch_pointer (struct pointer *pointer, int switch_times);
 int piet_push(int stack[], int **stack_ptr, int push_value);

@@ -68,7 +68,13 @@ int main(int argc, char *argv[])
 	while (bumps < 8) // DP should see all 4 directions
 	{
 		process_pointer(&current_y, &current_x, height, width, map, &pointer, codel_array, &bumps);
-		// process_move(codel_array, &pointer, stack, &stack_ptr);
+		if (bumps == 0)
+		{
+			int hue_steps, light_steps;
+			struct codel *from = codel_array[pointer.codels[0]], *to = codel_array[pointer.codels[1]];
+			count_steps(&from->color, &to->color, &hue_steps, &light_steps);
+			process_move(hue_steps, light_steps, from->size, &pointer, stack, &stack_ptr);
+		}
 		// printf("codel: %2i, x %2i, y %2i, DP: %2i, CC: %2i\t", pointer.codels[1], current_x, current_y, pointer.DP, pointer.CC);
 		// printf("bumped: %i\n", bumps);
 	}

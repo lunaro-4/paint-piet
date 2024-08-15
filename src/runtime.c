@@ -197,11 +197,18 @@ void count_steps (struct color *a, struct color *b, int *hue_steps, int *light_s
 	enum piet_hue a_hue = 0, b_hue = 0;
 	enum piet_light a_light = 0, b_light = 0;
 
+
 	a_light = get_color_light(a);
 	b_light = get_color_light(b);
 
+	printf("colors: \n R:\t%2x\t%2x\nG:\t%2x\t%2x\nB:\t%2x\t%2x\n", a->red, b->red, a->green, b->green, a->blue, b->blue);
+
+	printf("lights: a: %i, b: %i\n", a_light, b_light);
+
 	a_hue = get_color_hue(a, a_light);
 	b_hue = get_color_hue(b, b_light);
+
+	printf("hue: a: %i, b: %i\n", a_hue, b_hue);
 
 	int local_hue_steps = b_hue - a_hue,
 		local_light_steps = b_light - a_light;
