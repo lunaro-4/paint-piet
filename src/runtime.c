@@ -2,7 +2,7 @@
 #include "paint-piet.h"
 
 #define MAX_COLOR 0xff
-#define MID_COLOR 0x00
+#define MID_COLOR 0xc0
 
 void pointer_bump (struct pointer *pointer)
 {
@@ -201,35 +201,28 @@ void count_steps (struct color *a, struct color *b, int *hue_steps, int *light_s
 	a_light = get_color_light(a);
 	b_light = get_color_light(b);
 
-	printf("colors: \n R:\t%2x\t%2x\nG:\t%2x\t%2x\nB:\t%2x\t%2x\n", a->red, b->red, a->green, b->green, a->blue, b->blue);
+	// printf("colors: \n R:\t%2x\t%2x\nG:\t%2x\t%2x\nB:\t%2x\t%2x\n", a->red, b->red, a->green, b->green, a->blue, b->blue);
 
-	printf("lights: a: %i, b: %i\n", a_light, b_light);
+	// printf("lights: a: %i, b: %i\n", a_light, b_light);
 
 	a_hue = get_color_hue(a, a_light);
 	b_hue = get_color_hue(b, b_light);
 
-	printf("hue: a: %i, b: %i\n", a_hue, b_hue);
+	// printf("hue: a: %i, b: %i\n", a_hue, b_hue);
 
 	int local_hue_steps = b_hue - a_hue,
 		local_light_steps = b_light - a_light;
 
 	if (local_light_steps < 0)
-		local_light_steps += 2;
+		local_light_steps += 3;
 
 	*light_steps = local_light_steps;
 
 	if (local_hue_steps < 0)
-		local_hue_steps += 5;
+		local_hue_steps += 6;
 
 	*hue_steps = local_hue_steps;
 
 
-
-	/* int r_diff = a->red - b->red, g_diff = a->green - b->green, b_diff = a->blue - a->blue;
-
-	if ((r_diff >= 0 && g_diff >= 0) || (g_diff >= 0 && b_diff >= 0) || (b_diff >= 0 && r_diff >= 0))
-	{
-		++*hue_steps;
-	} */
 
 }

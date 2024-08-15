@@ -227,7 +227,7 @@ int piet_roll (int stack[], int **stack_ptr)
 	int temp_stack[STACK_MAX_SIZE], temp_temp_stack[STACK_MAX_SIZE+1];
 	
 	int rolls = **stack_ptr, depth = *(*(stack_ptr) - 1);
-	if (stack - *stack_ptr < rolls)
+	if (*stack_ptr - stack < rolls)
 	{
 		perror("Requested n of rolls is greater then current stack size");
 		return 1;
@@ -244,7 +244,7 @@ int piet_roll (int stack[], int **stack_ptr)
 	for (int i = 0; i < rolls; i++)
 	{
 		for (int j = 0; j < depth - 1; j++)
-			temp_temp_stack[j+1] = temp_stack[j];
+			temp_temp_stack[j + 1] = temp_stack[j];
 		temp_temp_stack[0] = temp_stack[depth - 1];
 		for (int j = 0; j < depth; j++)
 			temp_stack[j] = temp_stack[j];
@@ -297,64 +297,75 @@ int piet_output_num (int stack[], int **stack_ptr)
 	return 0;
 }
 
-int _piet_debug (enum piet_action command, struct pointer *pointer, int codel_value, int stack[], int **stack_ptr)
+void _piet_debug (int hue_steps, int light_steps)
 {
-	switch (command) {
-		case PIET_PUSH:
-			printf("Performing %s", "command");
+	printf("Input: hue_steps = %i, light_steps = %i\n", hue_steps, light_steps);
+	switch (light_steps) {
+		case 0:
+			switch (hue_steps) {
+				case 0:
+					return;
+				case 1:
+					printf("Command: %s\n", "ADD");
+					break;
+				case 2:
+					printf("Command: %s\n", "DIVIDE");
+					break;
+				case 3:
+					printf("Command: %s\n", "GREATER");
+					break;
+				case 4:
+					printf("Command: %s\n", "DUPLICATE");
+					break;
+				case 5:
+					printf("Command: %s\n", "PIET_INPUT_CHAR");
+					break;
+			}
 			break;
-		case PIET_POP:
-			printf("Performing %s", "command");
+		case 1:
+			switch (hue_steps) {
+				case 0:
+					printf("Command: %s\n", "PUSH");
+					break;
+				case 1:
+					printf("Command: %s\n", "PIET_SUBSTRACT");
+					break;
+				case 2:
+					printf("Command: %s\n", "MODULO");
+					break;
+				case 3:
+					printf("Command: %s\n", "PIET_POINTER");
+					break;
+				case 4:
+					printf("Command: %s\n", "PIET_ROLL");
+					break;
+				case 5:
+					printf("Command: %s\n", "PIET_OUTPUT_NUM");
+					break;
+			}
 			break;
-		case PIET_ADD:
-			printf("Performing %s", "command");
-			break;
-		case PIET_SUBSTRACT:
-			printf("Performing %s", "command");
-			break;
-		case PIET_MULTIPLY:
-			printf("Performing %s", "command");
-			break;
-		case PIET_DIVIDE:
-			printf("Performing %s", "command");
-			break;
-		case PIET_MODULO:
-			printf("Performing %s", "command");
-			break;
-		case PIET_NOT:
-			printf("Performing %s", "command");
-			break;
-		case PIET_GREATER:
-			printf("Performing %s", "command");
-			break;
-		case PIET_POINTER:
-			printf("Performing %s", "command");
-			break;
-		case PIET_SWITCH:
-			printf("Performing %s", "command");
-			break;
-		case PIET_DUPLICATE:
-			printf("Performing %s", "command");
-			break;
-		case PIET_ROLL:
-			printf("Performing %s", "command");
-			break;
-		case PIET_INPUT_NUM:
-			printf("Performing %s", "command");
-			break;
-		case PIET_INPUT_CHAR:
-			printf("Performing %s", "command");
-			break;
-		case PIET_OUTPUT_NUM:
-			printf("Performing %s", "command");
-			break;
-		case PIET_OUTPUT_CHAR:
-			printf("Performing %s", "command");
-			break;
-
+		case 2:
+			switch (hue_steps) {
+				case 0:
+					printf("Command: %s\n", "POP");
+					break;
+				case 1:
+					printf("Command: %s\n", "PIET_MULTIPLY");
+					break;
+				case 2:
+					printf("Command: %s\n", "PIET_NOT");
+					break;
+				case 3:
+					printf("Command: %s\n", "SWITCH");
+					break;
+				case 4:
+					printf("Command: %s\n", "PIET_INPUT_NUM");
+					break;
+				case 5:
+					printf("Command: %s\n", "PIET_OUTPUT_CHAR");
+					break;
+			}
 	}
-
-	return 0;
 }
 int process_piet (enum piet_action command, struct pointer *pointer, int codel_value, int stack[], int **stack_ptr)
 {
@@ -407,9 +418,6 @@ void process_move (int hue_steps, int light_steps, int codel_value, struct point
 
 	int	res = 0;
 	
-	printf("steps: hue: %i, light: %i\n", hue_steps, light_steps);
-
-
 	enum piet_action command;
 
 	switch (light_steps) {
@@ -432,6 +440,7 @@ void process_move (int hue_steps, int light_steps, int codel_value, struct point
 				case 5:
 					res = piet_input_char(stack, stack_ptr);
 			}
+			break;
 		case 1:
 			switch (hue_steps) {
 				case 0:
@@ -453,6 +462,7 @@ void process_move (int hue_steps, int light_steps, int codel_value, struct point
 					res = piet_output_num(stack , stack_ptr);
 					break;
 			}
+			break;
 		case 2:
 			switch (hue_steps) {
 				case 0:

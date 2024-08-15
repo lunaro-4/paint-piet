@@ -59,6 +59,8 @@ int process_piet (enum piet_action command, struct pointer *pointer, int codel_v
 
 void process_move (int hue_steps, int light_steps, int codel_value, struct pointer *pointer, int stack[], int **stack_ptr);
 
+void _piet_debug (int hue_steps, int light_steps);
+
 #endif // !PAINT_PIET_LIBRARY
 #ifndef PIET_COMMANDS
 #define PIET_COMMANDS
