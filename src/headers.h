@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include "structs.h"
 #include <dirent.h>
+#include "paint-piet.h"
 // #include "custom_utils.h"
 
 #endif // !HEADRERS

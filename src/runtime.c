@@ -1,4 +1,8 @@
 #include "headers.h"
+#include "paint-piet.h"
+
+#define MAX_COLOR 0xff
+#define MID_COLOR 0x00
 
 void pointer_bump (struct pointer *pointer)
 {
@@ -118,4 +122,107 @@ void process_pointer(int *y, int *x, int height, int width, int map[][width], st
 	}
 
 	
+}
+
+int get_color_light (struct color *color)
+{
+	if (color->red > 0 && color->green > 0 && color->blue > 0)
+		return PIET_LIGHT;
+	else
+	if (color->red < 0xff && color->green < 0xff && color->blue < 0xff)
+		return PIET_DARK;
+	else
+		return PIET_NORMAL;
+}
+
+int get_color_hue (struct color *color, enum piet_light light)
+{
+	bool red = false, green = false, blue = false;
+	/* TODO:
+	 *	LIGHT == MAX_COLOR
+	 *	NORMAL > MID_COLOR
+	 *	DARK <= MID_COLOR
+	 *	*/
+	switch (light) {
+		case PIET_LIGHT:
+			;
+		case PIET_NORMAL:
+			if (color->red == MAX_COLOR)
+				red = true;
+			if (color->green == MAX_COLOR)
+				green = true;
+			if (color->blue == MAX_COLOR)
+				blue = true;
+			break;
+		case PIET_DARK:
+			if (color->red >= MID_COLOR)
+				red = true;
+			if (color->green >= MID_COLOR)
+				green = true;
+			if (color->blue >= MID_COLOR)
+				blue = true;
+
+	}
+	// int result = 0;
+
+	/* if (red)
+		result += PIET_RED;
+	if (green)
+		result += PIET_GREEN;
+	if (blue)
+		result += PIET_BLUE; */
+
+	if (red && green)
+		return PIET_YELLOW;
+	if (green && blue)
+		return PIET_CYAN;
+	if (blue && red)
+		return PIET_MAGENTA;
+	if (red)
+		return PIET_RED;
+	if (green)
+		return PIET_GREEN;
+	if (blue)
+		return PIET_BLUE;
+
+	perror("No hue match found!");
+	return -1;
+
+}
+
+void count_steps (struct color *a, struct color *b, int *hue_steps, int *light_steps)
+{
+	*hue_steps = *light_steps = 0;
+
+	enum piet_hue a_hue = 0, b_hue = 0;
+	enum piet_light a_light = 0, b_light = 0;
+
+	a_light = get_color_light(a);
+	b_light = get_color_light(b);
+
+	a_hue = get_color_hue(a, a_light);
+	b_hue = get_color_hue(b, b_light);
+
+	int local_hue_steps = b_hue - a_hue,
+		local_light_steps = b_light - a_light;
+
+	if (local_light_steps < 0)
+		local_light_steps += 2;
+
+	*light_steps = local_light_steps;
+
+	if (local_hue_steps < 0)
+		local_hue_steps += 5;
+
+	*hue_steps = local_hue_steps;
+
+
+
+	/* int r_diff = a->red - b->red, g_diff = a->green - b->green, b_diff = a->blue - a->blue;
+
+	if ((r_diff >= 0 && g_diff >= 0) || (g_diff >= 0 && b_diff >= 0) || (b_diff >= 0 && r_diff >= 0))
+	{
+		++*hue_steps;
+	} */
+
 }
