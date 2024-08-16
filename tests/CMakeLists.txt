@@ -1,3 +1,6 @@
+# if(COMMAND cmake_policy)
+# 	cmake_policy(SET CMP0003 NEW)
+# endif(COMMAND cmake_policy)
 
 # pkg_check_modules(Check REQUIRED check)
 find_package(Check)
@@ -15,10 +18,10 @@ include_directories(${Check_INCLUDE_DIRS})
 link_directories (${Check_LIBRARY_DIRS})
 
 
-add_executable(tests test.c ../src/colormatrix.c ../src/custom_utils.c ../logger/logger.c test_suits_and_cases.c)
-target_link_libraries(tests ${CHECK_LIBRARIES} )
-include_directories(${PROJECT_SOURCE_DIR})
-target_link_libraries (tests ${PNG_LIBRARIES})
+
+add_executable(tests test.c test_suits_and_cases.c)
+target_link_libraries(tests ${CHECK_LIBRARIES} ${PNG_LIBRARIES} paint-piet-runtime.so logger.so )
+target_include_directories(tests PUBLIC ${PROJECT_SOURCE_DIR}/src ${LIBS}/logger/include ${LIBS}/paint-piet-runtime/include )
 
 # add_test(NAME check_test COMMAND test WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/tests)
 add_test(NAME test_params COMMAND ${PROJECT_SOURCE_DIR}/out/tests params )

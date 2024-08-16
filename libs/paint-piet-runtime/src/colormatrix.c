@@ -1,12 +1,24 @@
-#include "headers.h"
+#include "../include/paint-piet-runtime.h"
 #include "png.h"
 #include "pngconf.h"
+
 #include <stdio.h>
+#include <stdlib.h>
 
 
 #define min(a, b) ((a < b) ? a : b)
 #define max(a, b) ((a > b) ? a : b)
 
+int get_chunk_value(FILE * fptr)
+{
+	int value = 0;
+	for (char char_count = 0; char_count < 4; char_count++)
+	{
+		value += fgetc(fptr);
+		// printf("%i", fgetc(fptr));
+	}
+	return value;
+}
 
 void parse_RGB(int width, int height, struct color *matrix[height][width], png_bytepp png_rows)
 {

@@ -1,16 +1,15 @@
-#include "../src/headers.h"
 #include "test_headers.h"
-#include "../logger/logger.h"
-#include <check.h>
-#include <stdio.h>
 #include <string.h>
+#include "../libs/logger/logger.h"
 // int test_one_parameter_parsing(FILE *input, int assert_height, int assert_width);
 
 
 
 int main(int argc, char *argv[])
 { 
+
 	remove(LOGFILE);
+
 
 	bool params_flag = false,
 		 colors_flag = false,

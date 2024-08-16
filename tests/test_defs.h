@@ -1,8 +1,9 @@
 #include "test_headers.h"
-#include "../logger/logger.h"
-#include <check.h>
+#include "../libs/logger/logger.h"
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+
 #define CODEL_ARRAY_SIZE 500
 
 #ifndef GET_FILE

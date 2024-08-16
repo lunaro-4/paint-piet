@@ -1,19 +1,7 @@
-#include "headers.h"
-#include <stdio.h>
+#include "../include/paint-piet-runtime.h"
+#include <stdlib.h>
 
 struct color white_color = {0xff, 0xff, 0xff}, black_color = {0x0, 0x0, 0x0};
-
-int get_chunk_value(FILE * fptr)
-{
-	int value = 0;
-	for (char char_count = 0; char_count < 4; char_count++)
-	{
-		value += fgetc(fptr);
-		// printf("%i", fgetc(fptr));
-	}
-	return value;
-}
-
 
 void print_color_matrix(int height, int widht, struct color *matrix[height][widht])
 {
@@ -26,18 +14,6 @@ void print_color_matrix(int height, int widht, struct color *matrix[height][widh
     }
 }
 
-void print_2d_int(int height, int width, int arr[height][width])
-{
-	for (int i = 0; i < height; i++)
-	{
-		for (int j = 0; j < width; j++)
-		{
-			printf("%i\t", arr[i][j]);
-		}
-		putchar('\n');
-	}
-
-}
 void free_2d_colors(int height, int width, struct color *arr[][width])
 {
 	for (int i = 0; i < height; i++) {
@@ -95,24 +71,4 @@ void print_codel_array_colors(struct codel *codel_array[], int n_of_codels)
 {
 	for (int i = 2; i - 1 < n_of_codels; i++)
 		printf("codel_index: %2i R: %2x, G: %2x, B: %2x\t", i, codel_array[i]->color.red, codel_array[i]->color.green, codel_array[i]->color.blue);
-}
-
-void print_int_array(int arr[], int arr_len)
-{
-	putchar('[');
-	if (!arr_len)
-	{
-		int *ptr = arr;
-		while (*ptr != '\0')
-		{
-			printf("%i, ", *ptr);
-			ptr++;
-		}
-	}
-	else 
-		for (int i = 0; i < arr_len; i++)
-			printf("%i, ", arr[i]);
-
-	putchar(']');
-	putchar('\n');
 }

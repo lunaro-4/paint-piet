@@ -1,5 +1,4 @@
-#include "headers.h"
-#include "paint-piet.h"
+#include "../include/paint-piet-runtime.h"
 
 #define MAX_COLOR 0xff
 #define MID_COLOR 0xc0

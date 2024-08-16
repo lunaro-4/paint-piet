@@ -3,8 +3,9 @@
 
 
 
+#include "paint-piet-runtime.h"
 #include <check.h>
-#include "../src/headers.h"
+#include "project-headers.h"
 
 static struct parsing_case {
 	int height;

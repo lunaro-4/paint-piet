@@ -1,5 +1,5 @@
-#include "headers.h"
-#include "paint-piet.h"
+// #include "headers.h"
+#include "../include/paint-piet-runtime.h"
 #include <stdio.h>
 
 
