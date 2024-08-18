@@ -1,4 +1,5 @@
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
+# cmake_minimum_required(VERSION 3.22)
 project(paint-piet LANGUAGES C)
 set(CMAKE_CTEST_ARGUMENTS "--output-on-failure")
 include(CTest)

@@ -1,6 +1,6 @@
 [
  {
-  "directory": "/home/lunaro/git/paint-piet",
+  "directory": "/mnt/c/Users/pavel/git/paint-piet/build_li",
   "arguments": [
    "/usr/bin/cc",
    "-I/usr/include/libpng16",
@@ -13,12 +13,12 @@
    "-o",
    "CMakeFiles/logger.so.dir/logger.c.o",
    "-c",
-   "/home/lunaro/git/paint-piet/libs/logger/logger.c"
+   "/mnt/c/Users/pavel/git/paint-piet/libs/logger/logger.c"
   ],
-  "file": "/home/lunaro/git/paint-piet/libs/logger/logger.c"
+  "file": "/mnt/c/Users/pavel/git/paint-piet/libs/logger/logger.c"
  },
  {
-  "directory": "/home/lunaro/git/paint-piet",
+  "directory": "/mnt/c/Users/pavel/git/paint-piet/build_li",
   "arguments": [
    "/usr/bin/cc",
    "-I/usr/include/libpng16",
@@ -31,12 +31,12 @@
    "-o",
    "CMakeFiles/paint-piet-runtime.so.dir/src/colormatrix.c.o",
    "-c",
-   "/home/lunaro/git/paint-piet/libs/paint-piet-runtime/src/colormatrix.c"
+   "/mnt/c/Users/pavel/git/paint-piet/libs/paint-piet-runtime/src/colormatrix.c"
   ],
-  "file": "/home/lunaro/git/paint-piet/libs/paint-piet-runtime/src/colormatrix.c"
+  "file": "/mnt/c/Users/pavel/git/paint-piet/libs/paint-piet-runtime/src/colormatrix.c"
  },
  {
-  "directory": "/home/lunaro/git/paint-piet",
+  "directory": "/mnt/c/Users/pavel/git/paint-piet/build_li",
   "arguments": [
    "/usr/bin/cc",
    "-I/usr/include/libpng16",
@@ -49,12 +49,12 @@
    "-o",
    "CMakeFiles/paint-piet-runtime.so.dir/src/piet-commands.c.o",
    "-c",
-   "/home/lunaro/git/paint-piet/libs/paint-piet-runtime/src/piet-commands.c"
+   "/mnt/c/Users/pavel/git/paint-piet/libs/paint-piet-runtime/src/piet-commands.c"
   ],
-  "file": "/home/lunaro/git/paint-piet/libs/paint-piet-runtime/src/piet-commands.c"
+  "file": "/mnt/c/Users/pavel/git/paint-piet/libs/paint-piet-runtime/src/piet-commands.c"
  },
  {
-  "directory": "/home/lunaro/git/paint-piet",
+  "directory": "/mnt/c/Users/pavel/git/paint-piet/build_li",
   "arguments": [
    "/usr/bin/cc",
    "-I/usr/include/libpng16",
@@ -67,12 +67,12 @@
    "-o",
    "CMakeFiles/paint-piet-runtime.so.dir/src/utils.c.o",
    "-c",
-   "/home/lunaro/git/paint-piet/libs/paint-piet-runtime/src/utils.c"
+   "/mnt/c/Users/pavel/git/paint-piet/libs/paint-piet-runtime/src/utils.c"
   ],
-  "file": "/home/lunaro/git/paint-piet/libs/paint-piet-runtime/src/utils.c"
+  "file": "/mnt/c/Users/pavel/git/paint-piet/libs/paint-piet-runtime/src/utils.c"
  },
  {
-  "directory": "/home/lunaro/git/paint-piet",
+  "directory": "/mnt/c/Users/pavel/git/paint-piet/build_li",
   "arguments": [
    "/usr/bin/cc",
    "-I/usr/include/libpng16",
@@ -85,18 +85,18 @@
    "-o",
    "CMakeFiles/paint-piet-runtime.so.dir/src/pointer.c.o",
    "-c",
-   "/home/lunaro/git/paint-piet/libs/paint-piet-runtime/src/pointer.c"
+   "/mnt/c/Users/pavel/git/paint-piet/libs/paint-piet-runtime/src/pointer.c"
   ],
-  "file": "/home/lunaro/git/paint-piet/libs/paint-piet-runtime/src/pointer.c"
+  "file": "/mnt/c/Users/pavel/git/paint-piet/libs/paint-piet-runtime/src/pointer.c"
  },
  {
-  "directory": "/home/lunaro/git/paint-piet",
+  "directory": "/mnt/c/Users/pavel/git/paint-piet/build_li",
   "arguments": [
    "/usr/bin/cc",
    "-I/usr/include/libpng16",
-   "-I/home/lunaro/git/paint-piet/src",
-   "-I/home/lunaro/git/paint-piet/libs/logger/include",
-   "-I/home/lunaro/git/paint-piet/libs/paint-piet-runtime/include",
+   "-I/mnt/c/Users/pavel/git/paint-piet/src",
+   "-I/mnt/c/Users/pavel/git/paint-piet/libs/logger/include",
+   "-I/mnt/c/Users/pavel/git/paint-piet/libs/paint-piet-runtime/include",
    "-g",
    "-MD",
    "-MT",
@@ -106,18 +106,18 @@
    "-o",
    "CMakeFiles/tests.dir/test.c.o",
    "-c",
-   "/home/lunaro/git/paint-piet/tests/test.c"
+   "/mnt/c/Users/pavel/git/paint-piet/tests/test.c"
   ],
-  "file": "/home/lunaro/git/paint-piet/tests/test.c"
+  "file": "/mnt/c/Users/pavel/git/paint-piet/tests/test.c"
  },
  {
-  "directory": "/home/lunaro/git/paint-piet",
+  "directory": "/mnt/c/Users/pavel/git/paint-piet/build_li",
   "arguments": [
    "/usr/bin/cc",
    "-I/usr/include/libpng16",
-   "-I/home/lunaro/git/paint-piet/src",
-   "-I/home/lunaro/git/paint-piet/libs/logger/include",
-   "-I/home/lunaro/git/paint-piet/libs/paint-piet-runtime/include",
+   "-I/mnt/c/Users/pavel/git/paint-piet/src",
+   "-I/mnt/c/Users/pavel/git/paint-piet/libs/logger/include",
+   "-I/mnt/c/Users/pavel/git/paint-piet/libs/paint-piet-runtime/include",
    "-g",
    "-MD",
    "-MT",
@@ -127,16 +127,16 @@
    "-o",
    "CMakeFiles/tests.dir/test_suits_and_cases.c.o",
    "-c",
-   "/home/lunaro/git/paint-piet/tests/test_suits_and_cases.c"
+   "/mnt/c/Users/pavel/git/paint-piet/tests/test_suits_and_cases.c"
   ],
-  "file": "/home/lunaro/git/paint-piet/tests/test_suits_and_cases.c"
+  "file": "/mnt/c/Users/pavel/git/paint-piet/tests/test_suits_and_cases.c"
  },
  {
-  "directory": "/home/lunaro/git/paint-piet",
+  "directory": "/mnt/c/Users/pavel/git/paint-piet/build_li",
   "arguments": [
    "/usr/bin/cc",
    "-I/usr/include/libpng16",
-   "-I/home/lunaro/git/paint-piet/libs/paint-piet-runtime/include",
+   "-I/mnt/c/Users/pavel/git/paint-piet/libs/paint-piet-runtime/include",
    "-g",
    "-MD",
    "-MT",
@@ -146,16 +146,16 @@
    "-o",
    "CMakeFiles/main.dir/main.c.o",
    "-c",
-   "/home/lunaro/git/paint-piet/src/main.c"
+   "/mnt/c/Users/pavel/git/paint-piet/src/main.c"
   ],
-  "file": "/home/lunaro/git/paint-piet/src/main.c"
+  "file": "/mnt/c/Users/pavel/git/paint-piet/src/main.c"
  },
  {
-  "directory": "/home/lunaro/git/paint-piet",
+  "directory": "/mnt/c/Users/pavel/git/paint-piet/build_li",
   "arguments": [
    "/usr/bin/cc",
    "-I/usr/include/libpng16",
-   "-I/home/lunaro/git/paint-piet/libs/paint-piet-runtime/include",
+   "-I/mnt/c/Users/pavel/git/paint-piet/libs/paint-piet-runtime/include",
    "-g",
    "-MD",
    "-MT",
@@ -165,8 +165,8 @@
    "-o",
    "CMakeFiles/main.dir/local_prints.c.o",
    "-c",
-   "/home/lunaro/git/paint-piet/src/local_prints.c"
+   "/mnt/c/Users/pavel/git/paint-piet/src/local_prints.c"
   ],
-  "file": "/home/lunaro/git/paint-piet/src/local_prints.c"
+  "file": "/mnt/c/Users/pavel/git/paint-piet/src/local_prints.c"
  }
 ]

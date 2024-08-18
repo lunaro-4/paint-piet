@@ -21,6 +21,7 @@ int main(int argc, char *argv[])
 	else {
 		file_path = "in.png";
 	}
+
 	FILE *fptr = fopen(file_path, "r");
 
 	if (fptr == NULL) {
@@ -34,6 +35,10 @@ int main(int argc, char *argv[])
 	fclose(fptr);
 	fptr = fopen(file_path, "r");
 
+	if (fptr == NULL) {
+		perror("File error:");
+		return 1;
+	}
 
 	struct color *matrix[height][width];
 

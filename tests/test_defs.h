@@ -8,6 +8,11 @@
 
 #ifndef GET_FILE
 #define GET_FILE 
+
+#define TESTS_DIR "/example/"
+#ifdef _WIN32
+#define TESTS_DIR "\\example\\"
+#endif // _WIN32
 void get_file(FILE **fptr, char file_name[])
 {
 	char rel_path[1000];
@@ -17,7 +22,7 @@ void get_file(FILE **fptr, char file_name[])
 	if (is_in_tests) abs_path = realpath("..", NULL);
 	// perror(abs_path);
 
-	sprintf(rel_path, "%s%s%s", abs_path, "/example/", file_name);
+	sprintf(rel_path, "%s%s%s", abs_path, TESTS_DIR, file_name);
 	// perror(rel_path);
 	*fptr = fopen(rel_path, "r");
 	if (*fptr == NULL) 

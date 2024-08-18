@@ -62,6 +62,8 @@ out/*
 **/Makefile
 Makefile
 DartConfiguration.tcl
+build*
+
 
 **.log
 Testing

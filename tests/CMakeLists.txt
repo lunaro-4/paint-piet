@@ -18,21 +18,27 @@ include_directories(${Check_INCLUDE_DIRS})
 link_directories (${Check_LIBRARY_DIRS})
 
 
+set(SOURCE test.c test_suits_and_cases.c)
+set(TESTS_OUT tests)
+if (DEFINED ENV{OS})
+	set(SOURCE ${SOURCE} ../src/realpath.c)
+	# set(TESTS_OUT tests.exe)
+endif()
 
-add_executable(tests test.c test_suits_and_cases.c)
-target_link_libraries(tests ${CHECK_LIBRARIES} ${PNG_LIBRARIES} paint-piet-runtime.so logger.so )
-target_include_directories(tests PUBLIC ${PROJECT_SOURCE_DIR}/src ${LIBS}/logger/include ${LIBS}/paint-piet-runtime/include )
+add_executable(${TESTS_OUT} ${SOURCE})
+target_link_libraries(${TESTS_OUT} ${CHECK_LIBRARIES} ${PNG_LIBRARIES} paint-piet-runtime.so logger.so )
+target_include_directories(${TESTS_OUT} PUBLIC ${PROJECT_SOURCE_DIR}/src ${LIBS}/logger/include ${LIBS}/paint-piet-runtime/include )
 
 # add_test(NAME check_test COMMAND test WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/tests)
-add_test(NAME test_params COMMAND ${PROJECT_SOURCE_DIR}/out/tests params )
-add_test(NAME test_colors COMMAND ${PROJECT_SOURCE_DIR}/out/tests colors )
-add_test(NAME test_compare COMMAND ${PROJECT_SOURCE_DIR}/out/tests compare )
-add_test(NAME test_codels COMMAND ${PROJECT_SOURCE_DIR}/out/tests codels )
+add_test(NAME test_params COMMAND ${PROJECT_SOURCE_DIR}/out/${TESTS_OUT} params )
+add_test(NAME test_colors COMMAND ${PROJECT_SOURCE_DIR}/out/${TESTS_OUT} colors )
+add_test(NAME test_compare COMMAND ${PROJECT_SOURCE_DIR}/out/${TESTS_OUT} compare )
+add_test(NAME test_codels COMMAND ${PROJECT_SOURCE_DIR}/out/${TESTS_OUT} codels )
 set_tests_properties(test_params test_colors test_compare test_codels PROPERTIES TIMEOUT 30) 
 
 
-include(FindValgrind)
-add_custom_target(valgrind_test_sample
-  COMMAND ${VALGRIND_PROGRAM} --leak-check=full $<TARGET_FILE:tests>
-  DEPENDS tests
-)
+# include(FindValgrind)
+# add_custom_target(valgrind_test_sample
+#   COMMAND ${VALGRIND_PROGRAM} --leak-check=full $<TARGET_FILE:tests>
+#   DEPENDS tests
+# )
