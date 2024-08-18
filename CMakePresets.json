@@ -1,0 +1,38 @@
+{
+"version": 4,
+"include": ["./ConanPresets.json"],
+"configurePresets": [
+    {
+        "name": "default",
+        "displayName": "multi config",
+        "inherits": "conan-default"
+    },
+    {
+        "name": "release-linux",
+        "displayName": "release single linux config",
+        "inherits": "conan-release-linux"
+    },
+    {
+        "name": "release-windows",
+        "displayName": "release single windows config",
+        "inherits": "conan-release-windows"
+    }
+],
+"buildPresets": [
+
+    {
+        "name": "release-linux",
+        "configurePreset": "release-linux",
+        "configuration": "Release",
+        "inherits": "conan-release-linux"
+    },
+        {
+        "name": "release-windows",
+        "configurePreset": "release-windows",
+        "configuration": "Release",
+        "inherits": "conan-release-windows"
+    }
+
+]
+}
+

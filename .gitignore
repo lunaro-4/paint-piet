@@ -57,12 +57,17 @@ out/*
 .cache/*
 **/CMake*
 !**/CMakeLists.txt
+!CMakePresets.json
 **/CTest*
 **/cmake_install.cmake
 **/Makefile
 Makefile
+
+compile_commands.json
+
 DartConfiguration.tcl
 build*
+!build.sh
 
 
 **.log

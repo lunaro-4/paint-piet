@@ -3,7 +3,7 @@
 # endif(COMMAND cmake_policy)
 
 # pkg_check_modules(Check REQUIRED check)
-find_package(Check)
+find_package(check)
 
 include(CheckCSourceCompiles)
 include(CheckCSourceRuns)
@@ -14,8 +14,8 @@ include(CheckLibraryExists)
 include(CheckSymbolExists)
 include(CheckTypeSize)
 
-include_directories(${Check_INCLUDE_DIRS})
-link_directories (${Check_LIBRARY_DIRS})
+include_directories(${check_INCLUDE_DIRS})
+link_directories (${check_LIBRARY_DIRS})
 
 
 set(SOURCE test.c test_suits_and_cases.c)
@@ -26,7 +26,7 @@ if (DEFINED ENV{OS})
 endif()
 
 add_executable(${TESTS_OUT} ${SOURCE})
-target_link_libraries(${TESTS_OUT} ${CHECK_LIBRARIES} ${PNG_LIBRARIES} paint-piet-runtime.so logger.so )
+target_link_libraries(${TESTS_OUT} ${check_LIBRARIES} ${PNG_LIBRARIES} paint-piet-runtime.so logger.so )
 target_include_directories(${TESTS_OUT} PUBLIC ${PROJECT_SOURCE_DIR}/src ${LIBS}/logger/include ${LIBS}/paint-piet-runtime/include )
 
 # add_test(NAME check_test COMMAND test WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/tests)
