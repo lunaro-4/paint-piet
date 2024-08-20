@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
+BUILD_PATH="build_w/build/Release"
 OS=Windows
+source $BUILD_PATH/generators/conanbuild.sh
 cmake --preset release-windows
-cd build_w/build/Release
-source generators/conanbuild.sh
+cd $BUILD_PATH
 make && cp out/* ../../../out/
