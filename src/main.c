@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
 	get_height_and_width(fptr, &height, &width);
 
 	fclose(fptr);
-	fptr = fopen(file_path, "r");
+	fptr = fopen(file_path, "rb");
 
 	if (fptr == NULL) {
 		perror("File error:");

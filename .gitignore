@@ -64,8 +64,10 @@ out/*
 Makefile
 
 compile_commands.json
-
 DartConfiguration.tcl
+ConanPresets.json
+
+
 build*
 !build.sh
 

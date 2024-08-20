@@ -41,10 +41,27 @@ void parse_RGBA(int width, int height, struct color *matrix[height][width], png_
         }   
 }
 
+void user_error_fn(png_structp png_ptr, png_const_charp error_msg)
+{
+	perror(error_msg);
+	printf("%s", error_msg);
+}
+void user_warning_fn(png_structp png_ptr, png_const_charp warning_msg)
+{
+	perror(warning_msg);
+}
+
+
 int create_matrix(FILE *fptr,  int width, int height, struct color *matrix[height][width])
 {
+	png_const_charp error_msg;
 	png_structp pngptr =
-		png_create_read_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
+		png_create_read_struct(PNG_LIBPNG_VER_STRING, NULL, user_error_fn, user_warning_fn);
+	if(!pngptr)
+	{
+		perror("No luck here!");
+		return 1;
+	}
     png_infop pnginfo = png_create_info_struct(pngptr);
     png_set_palette_to_rgb(pngptr);
 	png_inforp *info_ptr;
