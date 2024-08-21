@@ -1,17 +1,19 @@
 #include "project-headers.h"
 #include <stdio.h>
-#include <stdlib.h>
+#include "logger.h"
 
 
 void print_2d_int(int height, int width, int arr[height][width])
 {
+	char msg[100];
+
 	for (int i = 0; i < height; i++)
 	{
 		for (int j = 0; j < width; j++)
 		{
-			printf("%i\t", arr[i][j]);
+			sprintf(msg, "%i\t", arr[i][j]);
 		}
-		putchar('\n');
+		msg[99] = '\n';
 	}
 
 }

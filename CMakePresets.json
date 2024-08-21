@@ -16,11 +16,6 @@
         "name": "release-windows",
         "displayName": "release single windows config",
         "inherits": "conan-release-windows"
-    },
-    {
-        "name": "release-w32",
-        "displayName": "release single windows config",
-        "inherits": "conan-release-w32"
     }
 ],
 "buildPresets": [
@@ -36,12 +31,6 @@
         "configurePreset": "release-windows",
         "configuration": "Release",
         "inherits": "conan-release-windows"
-    },
-    {
-        "name": "release-w32",
-        "configurePreset": "release-w32",
-        "configuration": "Release",
-        "inherits": "conan-release-w32"
     }
 
 ]

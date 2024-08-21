@@ -26,7 +26,7 @@ if (DEFINED ENV{OS})
 endif()
 
 add_executable(${TESTS_OUT} ${SOURCE})
-target_link_libraries(${TESTS_OUT} ${check_LIBRARIES} ${PNG_LIBRARIES} paint-piet-runtime.so logger.so )
+target_link_libraries(${TESTS_OUT} ${check_LIBRARIES} ${PNG_LIBRARIES} paint-piet-runtime logger )
 target_include_directories(${TESTS_OUT} PUBLIC ${PROJECT_SOURCE_DIR}/src ${LIBS}/logger/include ${LIBS}/paint-piet-runtime/include )
 
 # add_test(NAME check_test COMMAND test WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/tests)

@@ -1,6 +1,7 @@
 // #include "headers.h"
 #include "../include/paint-piet-runtime.h"
 #include <stdio.h>
+#include "logger.h"
 
 
 

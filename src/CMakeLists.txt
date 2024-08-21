@@ -1,6 +1,6 @@
 # set(LOCAL_LIBS main.c colormatrix.c custom_utils.c runtime.c piet-commands.c)
 add_executable(main main.c local_prints.c )
-target_link_libraries (main  paint-piet-runtime.so)
+target_link_libraries (main  paint-piet-runtime)
 target_include_directories(main PRIVATE ${LIBS}/paint-piet-runtime/include)
 
 

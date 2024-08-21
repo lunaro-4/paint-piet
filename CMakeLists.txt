@@ -12,6 +12,7 @@ set(LIBS ${PROJECT_SOURCE_DIR}/libs)
 
 # include_directories(${PNG_INCLUDE_DIRS} )
 # link_directories (${PNG_LIBRARY_DIRS})
+include_directories(${LIBS}/logger)
 
 enable_testing()
 

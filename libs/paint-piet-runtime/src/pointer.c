@@ -1,5 +1,7 @@
 #include "../include/paint-piet-runtime.h"
 
+#include "logger.h"
+
 #define MAX_COLOR 0xff
 #define MID_COLOR 0xc0
 
@@ -70,9 +72,16 @@ bool process_pointer(int *y, int *x, int height, int width, int map[][width], st
 
 	int new_y, new_x;
 
+
 	enum direction *dp = &pointer->DP;
 	enum moves *cc = &pointer->CC;
+
 	bool bumped = move_pointer(y, x, &new_y, &new_x, height, width, map, dp, cc, bumps);
+
+	char msg[100];
+	sprintf(msg , "Parameters: y %2i, x %2i, &new_y %2i, &new_x %2i, height %2i, width %2i, dp %2i, cc %2i, bumps %2i",*y, *x, new_y, new_x, height, width, *dp, *cc, *bumps);
+	// logger(msg);
+	
 	if (bumped) pointer_bump(pointer);
 
 	int current_codel_id = map[*y][*x];
@@ -193,6 +202,7 @@ int get_color_hue (struct color *color, enum piet_light light)
 
 void count_steps (struct color *a, struct color *b, int *hue_steps, int *light_steps)
 {
+	
 	*hue_steps = *light_steps = 0;
 
 	enum piet_hue a_hue = 0, b_hue = 0;
@@ -223,6 +233,7 @@ void count_steps (struct color *a, struct color *b, int *hue_steps, int *light_s
 		local_hue_steps += 6;
 
 	*hue_steps = local_hue_steps;
+
 
 
 

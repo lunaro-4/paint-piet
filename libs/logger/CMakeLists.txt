@@ -1,1 +1,1 @@
-add_library(logger.so logger.c)
+add_library(logger SHARED logger.c)

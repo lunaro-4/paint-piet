@@ -1,4 +1,5 @@
 #include "project-headers.h"
+#include "logger.h"
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -22,7 +23,7 @@ int main(int argc, char *argv[])
 		file_path = "in.png";
 	}
 
-	FILE *fptr = fopen(file_path, "r");
+	FILE *fptr = fopen(file_path, "rb");
 
 	if (fptr == NULL) {
 		perror("error openining file");
@@ -51,6 +52,7 @@ int main(int argc, char *argv[])
 	}
 
 	int res = create_matrix(fptr, width, height, matrix);
+
 	if (res) return 1;
 
 
@@ -96,8 +98,12 @@ int main(int argc, char *argv[])
 
 			if (DEBUG_FIRE > -1 && debug_action_count >= DEBUG_FIRE)
 			{
-				printf("\ncodel.id: from: %i, to: %i\n", pointer.codels[0], pointer.codels[1]);
-				printf("codel.size: from: %i, to: %i\n", from->size, to->size);
+				char msg1[100], msg2[200];
+				sprintf(msg1,"\ncodel.id: from: %i, to: %i\n", pointer.codels[0], pointer.codels[1]);
+				logger(msg1);
+
+				sprintf(msg2, "codel.size: from: %i, to: %i\n", from->size, to->size);
+				logger(msg2);
 				_piet_debug(hue_steps, light_steps);
 				print_int_array(stack, stack_ptr - stack);
 			}

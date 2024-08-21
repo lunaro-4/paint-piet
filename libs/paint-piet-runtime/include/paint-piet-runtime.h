@@ -73,6 +73,8 @@ void get_rows(FILE *fptr, png_bytepp *rows);
 
 void get_height_and_width(FILE *fptr, int* height, int* width);
 
+void get_height_and_width_png(FILE *fptr,  int *width, int *height);
+
 void test_nerby(int y, int x, int height, int width, int codel_index, int map[][width], struct color *matrix[][width], int *codel_size);
 
 void fill_2d_map(int height, int width, int map[][width], struct color *matrix[][width], int *n_of_codels, struct codel *codel_array[]);

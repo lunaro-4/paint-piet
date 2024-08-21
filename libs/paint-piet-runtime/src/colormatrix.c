@@ -1,7 +1,9 @@
 #include "../include/paint-piet-runtime.h"
 #include "png.h"
 #include "pngconf.h"
+#include "logger.h"
 
+#include <setjmp.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -51,6 +53,26 @@ void user_warning_fn(png_structp png_ptr, png_const_charp warning_msg)
 	perror(warning_msg);
 }
 
+void get_height_and_width_png(FILE *fptr,  int *width, int *height)
+{
+	png_structp pngptr =
+		png_create_read_struct(PNG_LIBPNG_VER_STRING, NULL, user_error_fn, user_warning_fn);
+    png_infop pnginfo = png_create_info_struct(pngptr);
+    png_set_palette_to_rgb(pngptr);
+    png_init_io(pngptr, fptr);
+	// if (setjmp(png_jmpbuf(pngptr)))
+	// {
+	// 	png_error(pngptr, "Error after jmp");
+	// }
+ //    png_init_io(pngptr, fptr);
+    png_read_png(pngptr, pnginfo, PNG_TRANSFORM_IDENTITY, NULL);
+	png_uint_32 local_width = 0, local_height =0;
+	local_height = png_get_image_height(pngptr, pnginfo);
+	local_width =  png_get_image_width(pngptr, pnginfo);
+
+
+
+}
 
 int create_matrix(FILE *fptr,  int width, int height, struct color *matrix[height][width])
 {
@@ -64,7 +86,6 @@ int create_matrix(FILE *fptr,  int width, int height, struct color *matrix[heigh
 	}
     png_infop pnginfo = png_create_info_struct(pngptr);
     png_set_palette_to_rgb(pngptr);
-	png_inforp *info_ptr;
     png_init_io(pngptr, fptr);
     png_read_png(pngptr, pnginfo, PNG_TRANSFORM_IDENTITY, NULL);
     png_bytepp png_rows = png_get_rows(pngptr, pnginfo);
