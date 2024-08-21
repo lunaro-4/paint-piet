@@ -4,14 +4,12 @@ project(paint-piet LANGUAGES C)
 set(CMAKE_CTEST_ARGUMENTS "--output-on-failure")
 include(CTest)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/out)
-# set(CMAKE_C_FLAGS ${CMAKE_C_FLAGS} -g)
+# set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g")
 INCLUDE( FindPkgConfig )
 # find_package(PkgConfig REQUIRED)
 # pkg_check_modules(PNG REQUIRED libpng)
 set(LIBS ${PROJECT_SOURCE_DIR}/libs)
 
-# include_directories(${PNG_INCLUDE_DIRS} )
-# link_directories (${PNG_LIBRARY_DIRS})
 include_directories(${LIBS}/logger)
 
 enable_testing()
@@ -20,6 +18,14 @@ enable_testing()
 if(COMMAND cmake_policy)
 	cmake_policy(SET CMP0003 NEW)
 endif(COMMAND cmake_policy)
+
+
+set(BUILD_TYPE "0$ENV{BUILD_TYPE}")
+
+set(LIB_KEYWORD SHARED)
+if ((${BUILD_TYPE} STREQUAL "0mono") OR (${BUILD_TYPE} STREQUAL "0MONO"))
+	set(LIB_KEYWORD "")
+endif()
 
 
 add_subdirectory(libs/logger )

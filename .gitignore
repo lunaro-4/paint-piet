@@ -69,7 +69,7 @@ ConanPresets.json
 
 
 build*
-!build.sh
+!build*.sh
 
 
 **.log
