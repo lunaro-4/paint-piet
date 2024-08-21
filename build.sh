@@ -29,4 +29,4 @@ source $BUILD_PATH/generators/conanbuild.sh
 BUILD_TYPE=$2 cmake --preset release-$KEYWORD
 cd $BUILD_PATH
 rm -rf out/*
-BUILD_TYPE=$2 make && cp out/* ../../../out/
+BUILD_TYPE=$2 make && cp out/* ../../../out/ && cp Makefile ../../..

@@ -9,7 +9,7 @@ int choose_light_actions (int hue_steps)
 {
 	switch (hue_steps) {
 		case 0:
-			perror("Incorrect action! Same color!");
+			logger("Incorrect action! Same color!");
 			return 0;
 		case 1:
 			return PIET_ADD;
@@ -22,7 +22,7 @@ int choose_light_actions (int hue_steps)
 		case 5:
 			return PIET_INPUT_CHAR;
 		default:
-			perror("Unknown action");
+			logger("Unknown action");
 			return 0;
 	}
 }
@@ -42,7 +42,7 @@ int choose_normal_actions (int hue_steps)
 		case 5:
 			return PIET_OUTPUT_NUM;
 		default:
-			perror("Unknown action");
+			logger("Unknown action");
 			return 0;
 	}
 
@@ -64,7 +64,7 @@ int choose_dark_actions (int hue_steps)
 		case 5:
 			return PIET_OUTPUT_CHAR;
 		default:
-			perror("Unknown action");
+			logger("Unknown action");
 			return 0;
 	}
 }
@@ -132,7 +132,7 @@ int piet_push(int stack[], int **stack_ptr, int push_value)
 {
 	if (*stack_ptr - stack +1 > STACK_MAX_SIZE)
 	{
-		perror("PUSH: Stack boundry reached!");
+		logger("PUSH: Stack boundry reached!");
 		return 1;
 	}
 	**stack_ptr = push_value;
@@ -144,7 +144,7 @@ int piet_pop(int stack[], int **stack_ptr)
 {
 	if (*stack_ptr - stack <= 0)
 	{
-		perror("POP: Stack boundry reached!");
+		logger("POP: Stack boundry reached!");
 		return 1;
 	}
 	**stack_ptr = 0;
