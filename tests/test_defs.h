@@ -24,7 +24,7 @@ void get_file(FILE **fptr, char file_name[])
 
 	sprintf(rel_path, "%s%s%s", abs_path, TESTS_DIR, file_name);
 	// perror(rel_path);
-	*fptr = fopen(rel_path, "r");
+	*fptr = fopen(rel_path, "rb");
 	if (*fptr == NULL) 
 	{
 		char msg[1030];
@@ -85,7 +85,7 @@ START_TEST(test_color_matrix)
 		}
 	}
 
-	int fails;
+	int fails = 0;
 	create_matrix(fptr, width, height, matrix);
 
 	for (int h = 0; h < height; h++)
