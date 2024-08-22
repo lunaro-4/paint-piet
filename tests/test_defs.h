@@ -1,5 +1,5 @@
 #include "test_headers.h"
-#include "../libs/logger/logger.h"
+#include "logger.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>

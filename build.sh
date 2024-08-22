@@ -26,7 +26,7 @@ BUILD_PATH="build_$KEYWORD/build/Release"
 
 
 source $BUILD_PATH/generators/conanbuild.sh
-BUILD_TYPE=$2 cmake --preset release-$KEYWORD
-cd $BUILD_PATH
-rm -rf out/*
+BUILD_TYPE=$2 cmake --preset release-$KEYWORD || exit 1
+cd $BUILD_PATH || exit 1
+rm -rf out/* || exit 1
 BUILD_TYPE=$2 make && cp out/* ../../../out/ && cp Makefile ../../..

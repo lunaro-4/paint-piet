@@ -10,7 +10,7 @@ INCLUDE( FindPkgConfig )
 # pkg_check_modules(PNG REQUIRED libpng)
 set(LIBS ${PROJECT_SOURCE_DIR}/libs)
 
-include_directories(${LIBS}/logger)
+include_directories(${LIBS}/logger/include)
 
 enable_testing()
 

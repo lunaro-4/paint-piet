@@ -1,1 +1,1 @@
-add_library(logger ${LIB_KEYWORD} logger.c)
+add_library(logger ${LIB_KEYWORD} src/logger.c)

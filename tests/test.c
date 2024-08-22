@@ -1,6 +1,6 @@
 #include "test_headers.h"
 #include <string.h>
-#include "../libs/logger/logger.h"
+#include "logger.h"
 // int test_one_parameter_parsing(FILE *input, int assert_height, int assert_width);
 
 
