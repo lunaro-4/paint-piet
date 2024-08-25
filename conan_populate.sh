@@ -4,7 +4,17 @@ CONAN_PRESETS="ConanPresets.json"
 
 rm $CONAN_PRESETS
 
-for KEYWORD in windows linux
+
+LISTED_BUILD="windows linux"
+
+
+if [[ $# > 0 ]]; then
+	LISTED_BUILD=$1
+fi
+
+
+
+for KEYWORD in $LISTED_BUILD
 do 
 	rm -rf build_$KEYWORD
 	conan install . --build=missing -s build_type=Release -pr:h=conan-profiles/$KEYWORD -of=build_$KEYWORD && sed -e "1,\$s/conan-release/&-$KEYWORD/" -i build_$KEYWORD/build/Release/generators/CMakePresets.json
