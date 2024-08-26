@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-./build.sh "linux" "$1"
-./build.sh "windows" "$1"
+./build.sh "-t linux $1"
+./build.sh "-t windows $1"
 
 if [ $OS ] 
 then
