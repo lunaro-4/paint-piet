@@ -71,6 +71,7 @@ ConanPresets.json
 build*
 !build*.sh
 
+**~
 
 **.log
 Testing

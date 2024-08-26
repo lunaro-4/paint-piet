@@ -32,6 +32,7 @@ add_subdirectory(libs/logger )
 add_subdirectory(libs/paint-piet-runtime)
 add_subdirectory(tests)
 add_subdirectory(src)
+add_subdirectory(src/gui)
 # set(CMAKE_CTEST_ARGUMENTS --output-on-falure)
 
 
