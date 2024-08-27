@@ -13,6 +13,15 @@ function valid_os() {
 	return 0
 }
 
+function is_valid_argumtn_value() {
+	if [ ${1:0:1} = '-' ]; then
+		return 0;
+	fi
+	return 1
+}
+
+UI_FILE_PATH="src/gui/paint-piet.ui"
+
 
 DO_CMAKE=1;
 OS_TARGET=
@@ -28,6 +37,10 @@ while :; do
 			fi
 			;;
         -m|--make) 
+			is_valid_argumtn_value $2
+			if [ $? -eq 0 ]; then
+				die 'invalid argument for --make'
+			fi
 			MAKE_TARGET=$2
 			shift
 			;;
@@ -36,6 +49,14 @@ while :; do
 			;;
 		-l|--libraries-included)
 			BUILD_TARGET="MONO"
+			shift
+			;;
+		-u|--ui-trmplate)
+			is_valid_argumtn_value $2
+			if [ $? -eq 0 ]; then
+				die 'invalid argument for --ui-template'
+			fi
+			UI_FILE_PATH=$2
 			shift
 			;;
         *) break
@@ -73,4 +94,4 @@ then
 fi
 cd $BUILD_PATH 
 rm -rf out/* 
-BUILD_TYPE=$BUILD_TYPE make $MAKE_TARGET && cp out/* ../../../out/ && cp Makefile ../../..
+BUILD_TYPE=$BUILD_TYPE make $MAKE_TARGET && cp  out/* ../../../out/ && cp Makefile ../../..

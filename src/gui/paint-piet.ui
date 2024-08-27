@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk" version="4.0"/>
-  <object class="GtkWindow">
+  <object class="GtkWindow" id="main_window">
+    <property name="width-request">200</property>
+    <property name="height-request">200</property>
+    <property name="visible">1</property>
     <property name="child">
-      <object class="GtkBox">
-        <child>
-          <placeholder/>
-        </child>
-        <child>
-          <placeholder/>
-        </child>
-        <child>
-          <placeholder/>
-        </child>
+      <object class="GtkButton" id="hello">
+        <property name="label" translatable="1">Hello</property>
+        <property name="focusable">1</property>
+        <property name="receives-default">1</property>
+        <signal name="clicked" handler="print_hello" swapped="no"/>
       </object>
     </property>
   </object>

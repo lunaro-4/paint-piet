@@ -2,21 +2,18 @@
 <!-- Generated with glade 3.38.2 -->
 <interface>
   <requires lib="gtk+" version="3.24"/>
-  <object class="GtkWindow">
+  <object class="GtkWindow" id="main_window">
+    <property name="width-request">200</property>
+    <property name="height-request">200</property>
+    <property name="visible">True</property>
     <property name="can-focus">False</property>
     <child>
-      <object class="GtkBox">
+      <object class="GtkButton" id="hello">
+        <property name="label" translatable="yes">Hello</property>
         <property name="visible">True</property>
-        <property name="can-focus">False</property>
-        <child>
-          <placeholder/>
-        </child>
-        <child>
-          <placeholder/>
-        </child>
-        <child>
-          <placeholder/>
-        </child>
+        <property name="can-focus">True</property>
+        <property name="receives-default">True</property>
+        <signal name="clicked" handler="print_hello" swapped="no"/>
       </object>
     </child>
   </object>
