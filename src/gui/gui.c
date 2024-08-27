@@ -1,5 +1,4 @@
-#include "gio/gio.h"
-#include "gmodule.h"
+#include "glib/gprintf.h"
 #include <gtk/gtk.h>
 
 #include <stdbool.h>
@@ -9,6 +8,21 @@
 
 #define UI_FILE_PATH "src/gui/paint-piet.ui"
 #define WINDOW_ID "main_window"
+
+void handle_size_restrictions (GtkWidget *widget, gpointer data)
+{
+	int current_position = gtk_paned_get_position(GTK_PANED(widget));
+	GtkWidget *start_child = gtk_paned_get_start_child(GTK_PANED(widget));
+	int minimum, minimum_baseline;
+	gtk_widget_measure(start_child, GTK_ORIENTATION_HORIZONTAL, -1, &minimum, NULL, &minimum_baseline, NULL);
+
+	const char *name = gtk_widget_get_name(start_child);
+	g_printf("%s", name);
+	if (minimum_baseline > -1 && current_position < minimum_baseline)
+	{
+		gtk_paned_set_position(GTK_PANED(widget), minimum_baseline);
+	}
+}
 
 G_MODULE_EXPORT void
 print_hello (GtkWidget *widget, gpointer data)
